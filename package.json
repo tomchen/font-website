@@ -1,0 +1,52 @@
+{
+  "name": "font-website",
+  "version": "1.0.0",
+  "description": "Tom Chen's Font Library, Tutorial, Collection Website",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tomchen/font-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tomchen/font-website/issues",
+    "email": "tomchen.org@gmail.com"
+  },
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "serve": "docusaurus serve",
+    "clear": "docusaurus clear"
+  },
+  "homepage": "https://font.tomchen.org",
+  "author": "Tom Chen <tomchen.org@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@docusaurus/core": "2.0.0-alpha.70",
+    "@docusaurus/preset-classic": "2.0.0-alpha.70",
+    "@mdx-js/react": "^1.6.22",
+    "clsx": "^1.1.1",
+    "docusaurus-plugin-sass": "^0.1.11",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "stylelint": "^13.8.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-sass-guidelines": "^7.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

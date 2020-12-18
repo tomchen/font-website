@@ -1,0 +1,238 @@
+---
+id: glyph
+title: Glyph object
+sidebar_label: Glyph object
+---
+
+## Overview
+
+## `Glyph()`
+
+#### Syntax
+
+```python
+Glyph(meta_dict, font)
+```
+
+#### Parameters
+
+| Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
+| :-- |:-- | :-- | :-- | :-- |
+| `meta_dict` | Required | *dictionary* (*string* as keys, *integer* or *string* as values) | *N/A* | *dictionary* of the meta information |
+| `font` | Required | *Font* object | *N/A* | The font the glyph belongs |
+
+#### Return value
+
+*Glyph* object
+
+#### Description
+
+Initialize a *Glyph* object. Load a *dictionary* of meta information and the font the glyph belongs.
+
+#### Examples
+
+```python
+
+```
+
+## `.meta`
+
+#### Syntax
+
+```python
+.meta
+```
+
+#### Type
+
+*dictionary* (*string* as keys, *integer* or *string* or *list* as values)
+
+#### Description
+
+The glyph's meta data.
+
+Glyph meta information's names (keys), value types, and their descriptions in the [BDF spec](../bdf_spec/file_format/individual_glyph_info):
+
+* `'glyphname'`: (*string*) see [`STARTCHAR`](../bdf_spec/file_format/individual_glyph_info#startchar)
+* `'codepoint'`: (*integer*) see [`ENCODING`](../bdf_spec/file_format/individual_glyph_info#encoding)
+* `'bbw'`: (*integer*) see [`BBX`](../bdf_spec/file_format/individual_glyph_info#bbx)
+* `'bbh'`: (*integer*) see [`BBX`](../bdf_spec/file_format/individual_glyph_info#bbx)
+* `'bbxoff'`: (*integer*) see [`BBX`](../bdf_spec/file_format/individual_glyph_info#bbx)
+* `'bbyoff'`: (*integer*) see [`BBX`](../bdf_spec/file_format/individual_glyph_info#bbx)
+* `'swx0'`: (*integer*) see [`SWIDTH`](../bdf_spec/file_format/individual_glyph_info#swidth)
+* `'swy0'`: (*integer*) see [`SWIDTH`](../bdf_spec/file_format/individual_glyph_info#swidth)
+* `'dwx0'`: (*integer*) see [`DWIDTH`](../bdf_spec/file_format/individual_glyph_info#dwidth)
+* `'dwy0'`: (*integer*) see [`DWIDTH`](../bdf_spec/file_format/individual_glyph_info#dwidth)
+* `'swx1'`: (*integer*) see [`SWIDTH1`](../bdf_spec/file_format/individual_glyph_info#swidth1)
+* `'swy1'`: (*integer*) see [`SWIDTH1`](../bdf_spec/file_format/individual_glyph_info#swidth1)
+* `'dwx1'`: (*integer*) see [`DWIDTH1`](../bdf_spec/file_format/individual_glyph_info#dwidth1)
+* `'dwy1'`: (*integer*) see [`DWIDTH1`](../bdf_spec/file_format/individual_glyph_info#dwidth1)
+* `'vvectorx'`: (*integer*) see [`VVECTOR`](../bdf_spec/file_format/individual_glyph_info#vvector)
+* `'vvectory'`: (*integer*) see [`VVECTOR`](../bdf_spec/file_format/individual_glyph_info#vvector)
+* `'hexdata'`: (*list* of *strings*) the glyph's shape data in the form of *list* of hexadecimal-encoded *string*
+
+:::note
+Same character or glyph's `'glyphname'` (`STARTCHAR`) information may vary in different fonts, therefore it is unreliable to use it. Use the API method [.chr()](#chr) instead.
+
+Consider using .[draw()](#draw).[todata(4)](bitmap#todata) instead of `.meta['hexdata']`.
+:::
+
+#### Examples
+
+```python
+
+```
+
+## `.font`
+
+#### Syntax
+
+```python
+.font
+```
+
+#### Type
+
+*Font* object
+
+#### Description
+
+It's a reference to the glyph's font object.
+
+#### Examples
+
+```python
+
+```
+
+## `.cp()`
+
+#### Syntax
+
+```python
+.cp()
+```
+
+#### Parameters
+
+No parameters
+
+#### Return value
+
+(*integer*) codepoint of the glyph
+
+#### Description
+
+Get the codepoint of the glyph.
+
+#### Examples
+
+```python
+
+```
+
+## `.chr()`
+
+#### Syntax
+
+```python
+.chr()
+```
+
+#### Parameters
+
+No parameters
+
+#### Return value
+
+(*string*) character (one character string) of the glyph
+
+#### Description
+
+Get the character of the glyph.
+
+#### Examples
+
+```python
+
+```
+
+## `.draw()`
+
+#### Syntax
+
+```python
+.draw(mode, fbb)
+```
+
+#### Parameters
+
+| Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
+| :-- |:-- | :-- | :-- | :-- |
+| `mode` | Optional | *integer* | `0` | See below |
+| `fbb` | Optional | *tuple* of *integers* | `None` | See below |
+
+`mode` can be:
+
+* `0` (default): area represented by the bitmap hex data, positioned and resized (cropped) (`fbbx` × `fbby`) according to [`FONTBOUNDINGBOX`](../bdf_spec/file_format/global_font_info#fontboundingbox) (the font's global bounding box)
+* `1`: area represented by the bitmap hex data, resized (cropped) according to [`BBX`](../bdf_spec/file_format/individual_glyph_info#bbx) (`bbw` × `bbh`), which is the individual glyph bounding box, without unnecessary blank margin (but still possible to have blank margin)
+* `2`: area represented by the bitmap hex data, original, without resizing
+* `-1`: user specified area.
+  * If mode `-1` is chosen, you **MUST** specify `fbb` parameter, which is a *tuple* `(fbbx, fbby, fbbxoff, fbbyoff)` representing your customized font bounding box. Similar to [`FONTBOUNDINGBOX`](../bdf_spec/file_format/global_font_info#fontboundingbox), `fbbx` and `fbby` represent the size, `fbbxoff` and `fbbyoff` represent the relative position of the starting (bottom-left) point to the origin
+
+#### Return value
+
+[*Bitmap*](bitmap) object
+
+#### Description
+
+Draw the glyph to a *Bitmap* object.
+
+#### Examples
+
+```python
+
+```
+
+:::note
+`glyph.draw(mode=-1, fbb=(w, h, xoff, yoff))` is equivalent to glyph.draw().[crop](bitmap#crop)(w, h, -xoff, -yoff). Pay attention to the minus sign before `xoff` and `yoff`.
+:::
+
+## `str()` and `print()`
+
+#### Syntax
+
+```python
+str(glyph)
+print(glyph)
+```
+
+#### Description
+
+(*string*) `str()` gets a human-readable *string* representation of the *Glyph* object.
+
+`print()` prints a human-readable *string* representation of the *Glyph* object.
+
+#### Examples
+
+```python
+
+```
+
+## `repr()`
+
+#### Syntax
+
+```python
+repr(glyph)
+```
+
+#### Description
+
+(*string*) It gets a programmer-readable *string* representation of the *Glyph* object.
+
+#### Examples
+
+```python
+
+```
