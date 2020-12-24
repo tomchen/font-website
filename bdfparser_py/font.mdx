@@ -14,6 +14,15 @@ sidebar_label: Font object
 Font(arg)
 ```
 
+#### Examples
+
+```python
+from bdfparser import Font
+font = Font('fonts/unifont-13.0.04.bdf')
+# same as:
+# font = Font(open('fonts/unifont-13.0.04.bdf'))
+```
+
 #### Parameters
 
 | Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
@@ -28,19 +37,21 @@ Font(arg)
 
 Initialize a *Font* object. Load the BDF font file if a file path string or a file object is present.
 
-#### Examples
-
-```python
-from bdfparser import Font
-font = Font('fonts/unifont-13.0.04.bdf')
-```
-
 ## `.headers`
 
 #### Syntax
 
 ```python
 .headers
+```
+
+#### Examples
+
+```python
+font.headers
+# {'bdfversion': 2.1, 'fontname': '-gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1','fbbx': 16, 'fbby': 16, 'fbbxoff': 0, 'fbbyoff': -2, 'pointsize': 16, 'xres': 75, 'yres': 75, 'metricsset': 0}
+font.headers['fontname']
+# '-gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1'
 ```
 
 #### Type
@@ -82,18 +93,19 @@ Headers are to be distinguished from [properties (props)](#props) which are insi
 Header names are defined in the spec, property names are not.
 :::
 
-#### Examples
-
-```python
-
-```
-
 ## `.props`
 
 #### Syntax
 
 ```python
 .props
+```
+
+#### Examples
+
+```python
+font.props
+# {'add_style_name': 'Sans Serif','average_width': '80','cap_height': '10',...,'weight_name': 'Medium','x_height': '8'}
 ```
 
 #### Type
@@ -107,12 +119,6 @@ This attribute of a *Font* object represents the property infomation which is in
 :::note
 Properties (props) are to be distinguished from [headers](#headers) which are typically all the information before the `STARTPROPERTIES` line in the font file.
 :::
-
-#### Examples
-
-```python
-
-```
 
 ## `.glyphs`
 
@@ -133,12 +139,6 @@ This attribute of a *Font* object represents the raw glyph data in the font.
 :::note
 As raw data with values without their keys, you usually should not use it directly. Use other API methods instead, such as [.glyph()](#glyph) and [.iterglyphs()](#iterglyphs).
 :::
-
-#### Examples
-
-```python
-
-```
 
 ## `.load_file_path()`
 
@@ -161,7 +161,7 @@ The *Font* object itself, with font loaded
 
 Load the BDF font file in the file path.
 
-`Font(file_path)` is equivalent to `Font().load_file_path(file_path)`.
+[`Font(file_path)`](#font) is equivalent to `Font().load_file_path(file_path)`.
 
 ## `.load_file_obj()`
 
@@ -185,7 +185,7 @@ The *Font* object itself, with font loaded
 
 Load the BDF font file object.
 
-`Font(file_object)` is equivalent to `Font().load_file_obj(file_object)`.
+[`Font(file_object)`](#font) is equivalent to `Font().load_file_obj(file_object)`.
 
 ## `.length()`
 
@@ -193,6 +193,14 @@ Load the BDF font file object.
 
 ```python
 .length()
+```
+
+#### Examples
+
+```python
+l = font.length()
+l2 = len(font)
+l == l2  # True
 ```
 
 #### Parameters
@@ -209,20 +217,22 @@ The method always returns how many glyphs actually exist in the font. This could
 
 `font_obj.length()` is equivalent to `len(font_obj)`.
 
-#### Examples
-
-```python
-l = font.length()
-l2 = len(font)
-l == l2  # True
-```
-
 ## `.iterglyphs()`
 
 #### Syntax
 
 ```python
 .iterglyphs(order, r)
+```
+
+#### Examples
+
+```python
+# print all basic latin letters (A-Za-z)'s character and bitmap shape, in reverse order:
+for glyph in font.iterglyphs(order=2 ,r=[(65, 90), (97, 122)]):
+    print('Character "' + glyph.chr() + '"\'s shape:')
+    print(glyph)
+# remove `order=2 ,r=[(65, 90), (97, 122)]` to print all glyphs in the font in normal ascending order
 ```
 
 #### Parameters
@@ -259,18 +269,19 @@ See also [Wikipedia article "Unicode block"](https://en.wikipedia.org/wiki/Unico
 
 This method returns an iterator of all the glyphs (as [*Glyph*](glyph) objects) in the font (default) or in the specified codepoint range in the font, sorted by the specified order (or by the ascending codepoint order by default)
 
-#### Examples
-
-```python
-
-```
-
 ## `.itercps()`
 
 #### Syntax
 
 ```python
 .itercps(order, r)
+```
+
+#### Examples
+
+```python
+for codepoint in font.itercps():
+    print(codepoint)
 ```
 
 #### Parameters
@@ -285,18 +296,20 @@ See [`.iterglyphs()`](#iterglyphs)'s "Parameters" section
 
 This method is almost identical to [`.iterglyphs()`](#iterglyphs), except it returns an *iterator* of glyph codepoints instead of an *iterator* of *Glyph* objects
 
-#### Examples
-
-```python
-
-```
-
 ## `.glyph()`
 
 #### Syntax
 
 ```python
 .glyph(character)
+```
+
+#### Examples
+
+```python
+# get glyph "a" and print its shape:
+glyph_a = font.glyph('a')
+print(glyph_a)
 ```
 
 #### Parameters
@@ -321,6 +334,13 @@ Get a glyph (as Glyph object) by its character
 .glyphbycp(codepoint)
 ```
 
+#### Examples
+
+```python
+# get glyph "a" whose codepoint is 97:
+glyph_a = font.glyphbycp(97)
+```
+
 #### Parameters
 
 | Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
@@ -335,12 +355,6 @@ Get a glyph (as Glyph object) by its character
 
 Get a glyph (as Glyph object) by its codepoint
 
-#### Examples
-
-```python
-
-```
-
 ## `.draw()`
 
 #### Syntax
@@ -349,15 +363,28 @@ Get a glyph (as Glyph object) by its codepoint
 .draw(string, linelimit, mode, direction, usecurrentglyphspacing)
 ```
 
+#### Examples
+
+```python
+# draw 'Bdf Hi' to a bitmap:
+font.draw('Bdf Hi')
+# each glyph could be wider when mode=0:
+self.font.draw('Bdf Hi', mode=0)
+# right to left:
+self.font.draw('مرحبا', direction='rl')
+# each line has 30 pixels instead of 512 by default:
+font.draw('Bdf Hi', linelimit=30)
+```
+
 #### Parameters
 
 | Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
 | :-- |:-- | :-- | :-- | :-- |
 | `string` | Required | *string* | *N/A* | The words, the setences, the paragraphs you want to draw |
-| `linelimit` | Optional | *integer* | `800` | Maximum pixels per line (row) |
+| `linelimit` | Optional | *integer* | `512` | Maximum pixels per line (row) |
 | `mode` | Optional | *integer* | `1` | `0`: uses [ffb](../bdf_spec/file_format/global_font_info#fontboundingbox), glyphs will be fixed-width (monospace) and -height<br />`1`: uses [dwidth](../bdf_spec/file_format/individual_glyph_info#dwidth) horizontally, [dwidth1](../bdf_spec/file_format/individual_glyph_info#dwidth1) vertically |
 | `direction` | Optional | *string* | `'lrtb'` | Writing direction. See below |
-| `usecurrentglyphspacing` | Optional | `False` | *N/A* | Useful when `direction='rl'`. For example, `font.draw('a的', direction='rl')` will misplace the wider "的" on the narrower "U" because normally we use the previous glyph's spacing ([dwidth](../bdf_spec/file_format/individual_glyph_info#dwidth)). You can use `font.draw('a的', direction='rl', usecurrentglyphspacing=True)` to use the current one and solve the problem |
+| `usecurrentglyphspacing` | Optional | *boolean* | `False` | Useful when `direction='rl'`. For example, `font.draw('a的', direction='rl')` will misplace the wider "的" on the narrower "U" because normally we use the previous glyph's spacing ([dwidth](../bdf_spec/file_format/individual_glyph_info#dwidth)). You can use `font.draw('a的', direction='rl', usecurrentglyphspacing=True)` to use the current one and solve the problem |
 
 `direction`:
 * `'lrtb'` or `'lr'`: left to right, lines from top to bottom (most common direction)
@@ -375,13 +402,7 @@ Get a glyph (as Glyph object) by its codepoint
 
 #### Description
 
-Draw the glyphs of the specified words / setences / paragraphs (as a *string*), to a *Bitmap* object
-
-#### Examples
-
-```python
-
-```
+Draw (render) the glyphs of the specified words / setences / paragraphs (as a *string*), to a *Bitmap* object
 
 ## `.drawcps()`
 
@@ -389,6 +410,13 @@ Draw the glyphs of the specified words / setences / paragraphs (as a *string*), 
 
 ```python
 .drawcps(cps, linelimit, mode, direction, usecurrentglyphspacing)
+```
+
+#### Examples
+
+```python
+# this is the same as `font.draw('Bdf Hi')`
+font.drawcps([66, 100, 102, 32, 72, 105])
 ```
 
 #### Parameters
@@ -409,18 +437,21 @@ Draw the glyphs of the specified codepoints, to a *Bitmap* object.
 
 This method is almost identical to [`.draw()`](#draw), except in the first parameter, it uses *iterable* of codepoints instead of *string*
 
-#### Examples
-
-```python
-
-```
-
 ## `.drawall()`
 
 #### Syntax
 
 ```python
 .drawall(order, r, linelimit, mode, direction, usecurrentglyphspacing)
+```
+
+#### Examples
+
+```python
+# draw all glyphs in the font, linelimit is 512 pixels by default:
+font.drawall()
+# change linelimit
+font.drawall(linelimit=700)
 ```
 
 #### Parameters
@@ -441,8 +472,6 @@ Draw all the glyphs in the font (default) or in the specified codepoint range in
 
 This method is like a combined version of [`.iterglyphs()`](#iterglyphs)/[`.itercps()`](#itercps) and [`.draw()`](#draw)/[`.drawcps()`](#drawcps).
 
-#### Examples
-
-```python
-
-```
+:::note
+Read [the section for *Bitmap*'s .tobytes()](bitmap#tobytes) to know how to output your bitmap to BMP / PNG / JPEG files.
+:::

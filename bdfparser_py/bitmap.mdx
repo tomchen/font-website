@@ -4,6 +4,8 @@ title: Bitmap object
 sidebar_label: Bitmap object
 ---
 
+import Figure from '@site/src/components/Figure'
+
 ## Overview
 
 ## `Bitmap()`
@@ -12,6 +14,24 @@ sidebar_label: Bitmap object
 
 ```python
 Bitmap(bin_bitmap_list)
+```
+
+#### Examples
+
+```python
+bitmap_quoteright = Bitmap(['01110000',
+                            '01110000',
+                            '01110000',
+                            '01100000',
+                            '11100000',
+                            '11000000'])
+bitmap_quoteright2 = Bitmap(['01110',
+                             '02110',
+                             '01102',
+                             '10200',
+                             '01000'])
+# but usually you get the `Bitmap` object from a `Font` or its `Glyph`
+bitmap_j = Font('fonts/spec_example_fixed.bdf').glyph("j").draw(mode=2)
 ```
 
 #### Parameters
@@ -28,18 +48,23 @@ Bitmap(bin_bitmap_list)
 
 Initialize a *Bitmap* object. Load binary bitmap data (*list* of *strings*).
 
-#### Examples
-
-```python
-
-```
-
 ## `.bindata`
 
 #### Syntax
 
 ```python
 .bindata
+```
+
+#### Examples
+
+```python
+bitmap_quoteright2.bindata
+# ['01110',
+#  '02110',
+#  '01102',
+#  '10200',
+#  '01000']
 ```
 
 #### Type
@@ -49,12 +74,6 @@ Initialize a *Bitmap* object. Load binary bitmap data (*list* of *strings*).
 #### Description
 
 This attribute of a *Bitmap* object represents the raw binary data of the bitmap.
-
-#### Examples
-
-```python
-
-```
 
 :::note
 If you want to get the data, use API methods [.todata()](#todata) or [.tobytes()](#tobytes) instead.
@@ -66,6 +85,12 @@ If you want to get the data, use API methods [.todata()](#todata) or [.tobytes()
 
 ```python
 .width()
+```
+
+#### Examples
+
+```python
+bitmap_quoteright.width()  # 8
 ```
 
 #### Parameters
@@ -80,18 +105,18 @@ No parameters
 
 Get the width of the bitmap.
 
-#### Examples
-
-```python
-
-```
-
 ## `.height()`
 
 #### Syntax
 
 ```python
 .height()
+```
+
+#### Examples
+
+```python
+bitmap_quoteright.height()  # 6
 ```
 
 #### Parameters
@@ -106,18 +131,20 @@ No parameters
 
 Get the height of the bitmap.
 
-#### Examples
-
-```python
-
-```
-
 ## `.clone()`
 
 #### Syntax
 
 ```python
 .clone()
+```
+
+#### Examples
+
+```python
+cloned_bitmap_quoteright = bitmap_quoteright.clone()
+cloned_bitmap_quoteright == bitmap_quoteright  # False
+cloned_bitmap_quoteright.bindata == bitmap_quoteright.bindata  # True
 ```
 
 #### Parameters
@@ -132,12 +159,6 @@ No parameters
 
 Get a deep copy / clone of the *Bitmap* object.
 
-#### Examples
-
-```python
-
-```
-
 ## `.crop()`
 
 #### Syntax
@@ -146,14 +167,26 @@ Get a deep copy / clone of the *Bitmap* object.
 .crop(w, h, xoff, yoff)
 ```
 
+#### Examples
+
+```python
+bitmap_quoteright.crop(7, 4, -1, 1)
+#         .###....
+#         .###....         ..###..
+# before: .###....  after: ..###..
+#         .##.....         ..##...
+#         ###.....         .###...
+#         ##......
+```
+
 #### Parameters
 
 | Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
 | :-- |:-- | :-- | :-- | :-- |
 | `w` | Required | *integer* | *N/A* | Width of the new bitmap |
 | `h` | Required | *integer* | *N/A* | Height of the new bitmap |
-| `xoff` | Optional | *integer* | `0` | Relative position in x (right) direction of the new starting (bottom-left) point to the old one |
-| `yoff` | Optional | *integer* | `0` | Relative position in y (top) direction of the new starting (bottom-left) point to the old one |
+| `xoff` | Optional | *integer* | `0` | Relative position in x (right) direction of the new starting (bottom-left) point from the old one |
+| `yoff` | Optional | *integer* | `0` | Relative position in y (top) direction of the new starting (bottom-left) point from the old one |
 
 #### Return value
 
@@ -163,22 +196,23 @@ The *Bitmap* object itself, which now has only the specified area as its `.binda
 
 Crop and/or extend the bitmap.
 
-#### Examples
-
-```python
-
-```
-
-:::note
-`glyph.draw().crop(w, h, xoff, yoff)` is equivalent to glyph.[draw](glyph#draw)(mode=-1, fbb=(w, h, -xoff, -yoff)). Pay attention to the minus sign before `xoff` and `yoff`.
-:::
-
 ## `.overlay()`
 
 #### Syntax
 
 ```python
 .overlay(bitmap)
+```
+
+#### Examples
+
+```python
+Bitmap(['010',
+        '201']).overlay(
+Bitmap(['100',
+        '122'])).bindata
+# ['110',
+#  '122']
 ```
 
 #### Parameters
@@ -195,12 +229,6 @@ The *Bitmap* object itself, which now has the combined bitmap as its `.bindata`.
 
 Overlay another bitmap over the current one.
 
-#### Examples
-
-```python
-
-```
-
 ## `Bitmap.concatall()`
 
 #### Syntax
@@ -208,6 +236,203 @@ Overlay another bitmap over the current one.
 ```python
 Bitmap.concatall(bitmaplist, direction, align, offsetlist)
 ```
+
+#### Examples
+
+```python
+Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2])
+```
+
+<details><summary>Click to see the output of the above code</summary>
+
+```
+..............###............
+..............###............
+..............###............
+..............###............
+.............................
+.............###.............
+.............###.............
+.............###.............
+.............###.............
+............###..............
+............###..............
+............###..............
+............###..............
+............###..............
+...........###...............
+...........###...............
+.###.......###...............
+.###.......###...........###.
+.###......#.##...........&##.
+.##......####............##.&
+###.....####............#.&..
+##......###..............#...
+```
+
+</details>
+
+---
+
+```python
+Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], offsetlist=[-3, 4])
+```
+
+<details><summary>Click to see the output of the above code</summary>
+
+```
+...........###................
+...........###................
+...........###................
+...........###................
+..............................
+..........###.................
+..........###.................
+..........###.................
+..........###.................
+.........###..................
+.........###..................
+.........###..................
+.........###..................
+.........###..................
+........###...................
+........###...................
+.###....###...................
+.###....###...............###.
+.###...#.##...............&##.
+.##...####................##.&
+###..####................#.&..
+##...###..................#...
+```
+
+</details>
+
+---
+
+```python
+Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], direction=0)
+```
+
+<details><summary>Click to see the output of the above code</summary>
+
+```
+.###............
+.###............
+.###............
+.##.............
+###.............
+##..............
+......###.......
+......###.......
+......###.......
+......###.......
+................
+.....###........
+.....###........
+.....###........
+.....###........
+....###.........
+....###.........
+....###.........
+....###.........
+....###.........
+...###..........
+...###..........
+...###..........
+...###..........
+..#.##..........
+.####...........
+####............
+###.............
+.###............
+.&##............
+.##.&...........
+#.&.............
+.#..............
+```
+
+</details>
+
+---
+
+```python
+Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], align=0)
+```
+
+<details><summary>Click to see the output of the above code</summary>
+
+```
+.###..........###........###.
+.###..........###........&##.
+.###..........###........##.&
+.##...........###.......#.&..
+###......................#...
+##...........###.............
+.............###.............
+.............###.............
+.............###.............
+............###..............
+............###..............
+............###..............
+............###..............
+............###..............
+...........###...............
+...........###...............
+...........###...............
+...........###...............
+..........#.##...............
+.........####................
+........####.................
+........###..................
+```
+
+</details>
+
+---
+
+```python
+Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], direction=0, align=0)
+```
+
+<details><summary>Click to see the output of the above code</summary>
+
+```
+.........###....
+.........###....
+.........###....
+.........##.....
+........###.....
+........##......
+......###.......
+......###.......
+......###.......
+......###.......
+................
+.....###........
+.....###........
+.....###........
+.....###........
+....###.........
+....###.........
+....###.........
+....###.........
+....###.........
+...###..........
+...###..........
+...###..........
+...###..........
+..#.##..........
+.####...........
+####............
+###.............
+............###.
+............&##.
+............##.&
+...........#.&..
+............#...
+```
+
+</details>
 
 #### Parameters
 
@@ -228,12 +453,6 @@ Concatenate all *Bitmap* objects in a *list*.
 
 This is a class method, meaning you need to call the method on the `Bitmap` class: `Bitmap.concatall()`
 
-#### Examples
-
-```python
-
-```
-
 ## `+` concat
 
 #### Syntax
@@ -242,17 +461,17 @@ This is a class method, meaning you need to call the method on the `Bitmap` clas
 bitmap1 + bitmap2
 ```
 
+#### Examples
+
+```python
+combined_bitmap = bitmap_quoteright + bitmap_j
+```
+
 #### Description
 
 `+` is a shortcut of `Bitmap.concatall()`. Use `+` to concatenate two *Bitmap* objects and get a new *Bitmap* objects.
 
-It's equivalent to `Bitmap.concatall([bitmap1, bitmap2])`, using default values of all the optional parameters of `Bitmap.concatall()`
-
-#### Examples
-
-```python
-
-```
+It's equivalent to `Bitmap.concatall([bitmap1, bitmap2])`, using default values of all the optional parameters of `Bitmap.concatall()`. `bitmap1` won't change
 
 ## `.concat()`
 
@@ -260,6 +479,12 @@ It's equivalent to `Bitmap.concatall([bitmap1, bitmap2])`, using default values 
 
 ```python
 .concat(bitmap, direction, align, offsetlist)
+```
+
+#### Examples
+
+```python
+bitmap_quoteright.concat(bitmap_j)
 ```
 
 #### Parameters
@@ -278,13 +503,7 @@ The *Bitmap* object itself, which now has the combined bitmap as its `.bindata`.
 
 Concatenate another *Bitmap* objects to the current one.
 
-Similar to `bitmap1 + bitmap2` and `Bitmap.concatall([bitmap1, bitmap2])`, but update and return the current *Bitmap* object instead of a new one.
-
-#### Examples
-
-```python
-
-```
+It is similar to `bitmap1 + bitmap2` and `Bitmap.concatall([bitmap1, bitmap2])`, but update the current *Bitmap* object and return it, instead of creating a new one like the other two methods.
 
 ## `.enlarge()`
 
@@ -292,6 +511,18 @@ Similar to `bitmap1 + bitmap2` and `Bitmap.concatall([bitmap1, bitmap2])`, but u
 
 ```python
 .enlarge(x, y)
+```
+
+#### Examples
+
+```python
+bitmap_quoteright.enlarge(3, 1)
+#         .###....        ...#########............
+#         .###....        ...#########............
+# before: .###.... after: ...#########............
+#         .##.....        ...######...............
+#         ###.....        #########...............
+#         ##......        ######..................
 ```
 
 #### Parameters
@@ -309,12 +540,6 @@ The *Bitmap* object itself, which now has the enlarged bitmap as its `.bindata`.
 
 Enlarge a *Bitmap* object, by multiplying every pixel in x (right) direction and in y (top) direction.
 
-#### Examples
-
-```python
-
-```
-
 ## `*` enlarge
 
 #### Syntax
@@ -322,6 +547,13 @@ Enlarge a *Bitmap* object, by multiplying every pixel in x (right) direction and
 ```python
 bitmap_obj * integer
 bitmap_obj * tuple_of_two_integer
+```
+
+#### Examples
+
+```python
+bitmap_quoteright * 3       # same as bitmap_quoteright.enlarge(3, 3)
+bitmap_quoteright * (3, 2)  # same as bitmap_quoteright.enlarge(3, 2)
 ```
 
 #### Description
@@ -332,18 +564,21 @@ bitmap_obj * tuple_of_two_integer
 
 `bitmap_object * (x, y)` is similar to `bitmap_object.enlarge(x, y)`, but returns a new *Bitmap* object instead of updating the current one.
 
-#### Examples
-
-```python
-
-```
-
 ## `.replace()`
 
 #### Syntax
 
 ```python
 .replace(substr, newsubstr)
+```
+
+#### Examples
+
+```python
+Bitmap(['0121',
+        '2200']).replace(2, 1).bindata
+# ['0111',
+#  '1100']
 ```
 
 #### Parameters
@@ -361,18 +596,25 @@ The *Bitmap* object itself, which now has the altered bitmap as its `.bindata`.
 
 Replace a string by another in the bitmap. Because the bitmap's data is stored as a *list* of `'0'`/`'1'`/`'2'` *strings* (e.g. `['0211','1010','0200']`), you can replace a substring (e.g. `'2'` by `'1'`) in it.
 
-#### Examples
-
-```python
-
-```
-
 ## `.shadow()`
 
 #### Syntax
 
 ```python
 .shadow(xoff, yoff)
+```
+
+#### Examples
+
+```python
+bitmap_quoteright.shadow(2, -1)
+#         .###....        .###......
+#         .###....        .###&&....
+#         .###....        .###&&....
+# before: .##..... after: .##&&&....
+#         ###.....        ###&&.....
+#         ##......        ##&&&.....
+#                         ..&&......
 ```
 
 #### Parameters
@@ -394,18 +636,26 @@ The shadow will be filled by `'2'`s.
 
 Default parameters (`xoff=1, yoff=-1`) mean add a shadow which is 1 pixel right and 1 pixel bottom to the original shape.
 
-#### Examples
-
-```python
-
-```
-
 ## `.glow()`
 
 #### Syntax
 
 ```python
 .glow()
+```
+
+#### Examples
+
+```python
+bitmap_quoteright.glow()
+#                         ..&&&.....
+#         .###....        .&###&....
+#         .###....        .&###&....
+#         .###....        .&###&....
+# before: .##..... after: .&##&.....
+#         ###.....        &###&.....
+#         ##......        &##&......
+#                         .&&.......
 ```
 
 #### Parameters
@@ -422,18 +672,23 @@ Add glow effect to the shape in the bitmap.
 
 The glowing area is one pixel up, right, bottom and left to the original pixels, and will be filled by `'2'`s.
 
-#### Examples
-
-```python
-
-```
-
 ## `.bytepad()`
 
 #### Syntax
 
 ```python
 .bytepad(bits)
+```
+
+#### Examples
+
+```python
+bitmap_quoteright2.bytepad().bindata
+#        ['01110',       ['01110000',
+#         '02110',        '02110000',
+# before: '01102', after: '01102000',
+#         '10200',        '10200000',
+#         '01000']        '01000000']
 ```
 
 #### Parameters
@@ -454,18 +709,25 @@ Do this before using the bitmap for a glyph in a BDF font: per BDF spec, if the 
 
 Parameter `bits` is `8` by default because 1 byte = 8 bits, you can change it if you want to use other unconventional, off-spec values, such as 4 (half a byte).
 
-#### Examples
-
-```python
-
-```
-
 ## `.todata()`
 
 #### Syntax
 
 ```python
 .todata(datatype)
+```
+
+#### Examples
+
+```python
+bitmap1 = Bitmap(['00010', '11010', '00201'])
+bitmap2 = Bitmap(['00010', '11010'])
+bitmap1.todata(0)  # '00010\n11010\n00201'
+bitmap1.todata()   # ['00010', '11010', '00201']
+bitmap1.todata(2)  # [[0, 0, 0, 1, 0], [1, 1, 0, 1, 0], [0, 0, 2, 0, 1]]
+bitmap1.todata(3)  # [0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 1]
+bitmap2.todata(4)  # ['02', '1a']
+bitmap2.todata(5)  # [2, 26]
 ```
 
 #### Parameters
@@ -484,8 +746,17 @@ Parameter `bits` is `8` by default because 1 byte = 8 bits, you can change it if
 * `5`: *list* of *integers*. e.g. `[2,26]`
 
 :::note
-You can't have `'2'`s when using `datatype` `4` or `5`
+You can't have `'2'`s when using `datatype` `4` or `5`.
 :::
+
+:::note
+If you use [NumPy](https://numpy.org/), set `datatype` to `2`. Below is a simple example, see "[Quick examples](./#quick-examples)" for another example with NumPy and [Matplotlib](https://matplotlib.org/).
+:::
+
+```python
+import numpy
+nparr = numpy.array(bitmap1.todata(2))
+```
 
 #### Return value
 
@@ -495,12 +766,6 @@ Bitmap data in the specified type (*list* or *string*) and format
 
 Get the bitmap's data in the specified type and format.
 
-#### Examples
-
-```python
-
-```
-
 ## `.tobytes()`
 
 #### Syntax
@@ -509,19 +774,60 @@ Get the bitmap's data in the specified type and format.
 .tobytes(mode, bytesdict)
 ```
 
+#### Examples
+
+```python
+from bdfparser import Font
+c = Font('fonts/unifont-13.0.04.bdf').glyph("c").draw().crop(6, 8, 1, 2).shadow()
+print(c)
+#          .####..
+#          #.&&&#.
+#          #&....&
+#          #&.....
+# now it's #&.....
+#          #&.....
+#          #&...#.
+#          .####.&
+#          ..&&&&.
+from PIL import Image
+im = Image.frombytes('1', (c.width(), c.height()), c.tobytes('1'))
+im.save("1.png", "PNG")
+im = Image.frombytes('L', (c.width(), c.height()), c.tobytes('L'))
+im.save("L.png", "PNG")
+im = Image.frombytes('RGB', (c.width(), c.height()), c.tobytes())
+im.save("RGB.png", "PNG")
+im = Image.frombytes('RGBA', (c.width(), c.height()), c.tobytes('RGBA'))
+im.save("RGBA.png", "PNG")
+```
+
+<Figure
+  src="bdfparser_py/img/pil.png"
+  caption="Import the cropped glyph 'c' with shadow effect into PIL (Pillow) library and save as PNG files in different modes"
+  width={500}
+  position="center"
+  baseUrl={true}
+/>
+
 #### Parameters
 
 | Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
 | :-- |:-- | :-- | :-- | :-- |
 | `mode` | Optional | *string* | `'RGB'` | PIL image mode. See below |
-| `bytesdict` | Optional | *dictionary* (*integer* as keys, *bytes* as values) or `None` | `None` | *dictionary* of integer `0`/`1`/`2` to bytes mapping |
+| `bytesdict` | Optional | *dictionary* (*integer* as keys, *bytes* as values) or `None` | Varies with `mode`. See below | *dictionary* mapping `0`/`1`/`2` in the bitmap data to bytes |
 
 `mode`: PIL image mode, it can be:
 
-* `'1'`: 1-bit pixels, black and white, stored with one pixel per byte
-* `'L'`: 8-bit pixels, black and white
-* `'RGB'`: 3x8-bit pixels, true color
-* `'RGBA'`: 4x8-bit pixels, true color with transparency mask
+* `'1'`: 1-bit pixels, black and white (two colors only), stored with one pixel per byte
+* `'L'`: 8-bit pixels, [black and white](https://en.wikipedia.org/wiki/Black_and_white) ([grayscale](https://en.wikipedia.org/wiki/Grayscale))
+* `'RGB'`: 3x8-bit pixels, [RGB model](https://en.wikipedia.org/wiki/RGB_color_model), true color
+* `'RGBA'`: 4x8-bit pixels, [RGBA model](https://en.wikipedia.org/wiki/RGBA_color_model), true color with transparency mask
+
+`bytesdict`'s default value varies with `mode`:
+
+* `mode='1'`: `{ 0: 1, 1: 0, 2: 0 }`, this one is special, the values are not bytes, although the final output is. Value `1` is white and `0` is black
+* `mode='L'`: `{ 0: b'\xff', 1: b'\x00', 2: b'\x7f' }`. Value `b'\xff'` is white, `b'\x00'` is black, `b'\x7f'` is middle gray. You can select gray of other shades
+* `mode='RGB'`: `{ 0: b'\xff\xff\xff', 1: b'\x00\x00\x00', 2: b'\xff\x00\x00' }`. Value `b'\xff\xff\xff'` is white, `b'\x00\x00\x00'` is black, `b'\xff\x00\x00'` is red. The 3 bytes represent red, green, blue channels in the [RGB model](https://en.wikipedia.org/wiki/RGB_color_model)
+* `mode='RGBA'`: `{ 0: b'\xff\xff\xff\x00', 1: b'\x00\x00\x00\xff', 2: b'\xff\x00\x00\xff' }`. Same as `'RGB'`, supplemented with a fourth byte representing [alpha channel (opacity)](https://en.wikipedia.org/wiki/RGBA_color_model)
 
 (see also [the "Modes" section in Pillow's docs](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#modes), but only the above modes are supported here)
 
@@ -538,12 +844,6 @@ Sometimes you want to output bitmap data and load it with PIL / Pillow ([Wikiped
 
 This method helps you to get the bitmap's data as *bytes* to be used with Pillow's [`Image.frombytes(mode, size, data)`](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.frombytes).
 
-#### Examples
-
-```python
-
-```
-
 ## `str()` and `print()`
 
 #### Syntax
@@ -553,17 +853,33 @@ str(bitmap)
 print(bitmap)
 ```
 
-#### Description
-
-(*string*) `str()` gets a human-readable *string* representation of the *Bitmap* object.
-
-`print()` prints a human-readable *string* representation of the *Bitmap* object.
-
 #### Examples
 
 ```python
-
+c = Font('fonts/unifont-13.0.04.bdf').glyph("c").draw().crop(6, 8, 1, 2).shadow()
+print(c)  # same as print(str(c))
+#         .####..
+#         #.&&&#.
+#         #&....&
+#         #&.....
+# output: #&.....
+#         #&.....
+#         #&...#.
+#         .####.&
+#         ..&&&&.
 ```
+
+#### Description
+
+(*string*) `str()` gets a human-readable (multi-line) *string* representation of the *Bitmap* object.
+
+`print()` prints a human-readable (multi-line) *string* representation of the *Bitmap* object.
+
+The following digits in the bitmap's binary-encoded *string* *list* data are replaced in `str()` and `print()`'s output:
+
+* `'0'`s are replaced by `#`
+* `'1'`s are replaced by `.`
+* `'2'`s are replaced by `&`
 
 ## `repr()`
 
@@ -573,12 +889,22 @@ print(bitmap)
 repr(bitmap)
 ```
 
-#### Description
-
-(*string*) It gets a programmer-readable *string* representation of the *Bitmap* object.
-
 #### Examples
 
 ```python
-
+# use `c` again in the last example
+print(repr(c))
+#        Bitmap(['0111100',
+#                '1022210',
+#                '1200002',
+#                '1200000',
+# output:        '1200000',
+#                '1200000',
+#                '1200010',
+#                '0111102',
+#                '0022220'])
 ```
+
+#### Description
+
+(*string*) It gets a programmer-readable (multi-line) *string* representation of the *Bitmap* object.
