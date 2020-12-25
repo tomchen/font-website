@@ -6,13 +6,22 @@ export default function Figure({
   caption,
   figure_number,
   width,
-  position,
   baseUrl,
+  link,
 }) {
   return (
     <figure style={{ textAlign: 'center', margin: '1em' }}>
-      <img alt={caption} src={useBaseUrl(src)} width={width} />
-      <figcaption style={{ fontStyle: 'italic' }}><strong>Figure {figure_number}</strong> {caption}</figcaption>
+      {link ? (
+        <a href={link}>
+          <img alt={caption} src={baseUrl ? useBaseUrl(src) : src} width={width} />
+        </a>
+      ) : (
+        <img alt={caption} src={baseUrl ? useBaseUrl(src) : src} width={width} />
+      )}
+      <figcaption style={{ fontStyle: 'italic' }}>
+        {figure_number && <strong>Figure {figure_number}{' '}</strong>}
+        {caption}
+      </figcaption>
     </figure>
   )
 }
