@@ -52,3 +52,4 @@ jobs:
         with:
           deploy_key: ${{ secrets.GH_PAGES_DEPLOY }}
           publish_dir: ./build
+          cname: font.tomchen.org
