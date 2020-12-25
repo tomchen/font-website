@@ -5,6 +5,7 @@ sidebar_label: BDF Parser (Python) - Overview
 slug: /
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl'
 import Figure from '@site/src/components/Figure'
 
 ## Introduction
@@ -65,10 +66,10 @@ im_ac.save("ac.png", "PNG")
 ```
 
 <Figure
-  src="bdfparser_py/img/ac.png"
+  src="bdfparser_py/ac.png"
   caption="ac.png (note its background is transparent)"
   position="center"
-  baseUrl={true}
+  imgUrl={true}
 />
 
 Print text "Hello!", from right to left, with glowing effect:
@@ -107,10 +108,10 @@ plt.show()
 ```
 
 <Figure
-  src="bdfparser_py/img/plot.png"
+  src="bdfparser_py/plot.png"
   caption="Plot image &quot;!olleH&quot;"
   position="center"
-  baseUrl={true}
+  imgUrl={true}
 />
 
 Save all glyphs in [Unifont](https://en.wikipedia.org/wiki/GNU_Unifont) as a black-and-white-two-color-only "font_preview.png" (with default width 512px):
@@ -124,11 +125,11 @@ im_ac.save("font_preview.png", "PNG")
 ```
 
 <Figure
-  src="bdfparser_py/img/font_preview_part.png"
+  src="bdfparser_py/font_preview_part.png"
   caption="Parts of the Unifont preview image (click the image to view the long original)"
   position="center"
-  baseUrl={true}
-  link="img/font_preview.png"
+  imgUrl={true}
+  link={useBaseUrl('img/bdfparser_py/font_preview.png')}
 />
 
 ## Copyright & links
