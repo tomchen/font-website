@@ -31,7 +31,7 @@ bitmap_quoteright2 = Bitmap(['01110',
                              '10200',
                              '01000'])
 # but usually you get the `Bitmap` object from a `Font` or its `Glyph`
-bitmap_j = Font('fonts/spec_example_fixed.bdf').glyph("j").draw(mode=2)
+bitmap_j = Font('tests/fonts/spec_example_fixed.bdf').glyph("j").draw(mode=2)
 ```
 
 #### Parameters
@@ -703,7 +703,7 @@ The *Bitmap* object itself, which now has the altered bitmap as its `.bindata`.
 
 #### Description
 
-Pad each line (row) to multiple of 8 (or other numbers) bits/pixels, with `'0'`s
+Pad each line (row) to multiple of 8 (or other numbers) bits/pixels, with `'0'`s.
 
 Do this before using the bitmap for a glyph in a BDF font: per BDF spec, if the bit/pixel count in a line is not multiple of 8, the line needs to be padded on the right with 0s to the nearest byte (that is, multiple of 8).
 
@@ -778,7 +778,7 @@ Get the bitmap's data in the specified type and format.
 
 ```python
 from bdfparser import Font
-c = Font('fonts/unifont-13.0.04.bdf').glyph("c").draw().crop(6, 8, 1, 2).shadow()
+c = Font('tests/fonts/unifont-13.0.04.bdf').glyph("c").draw().crop(6, 8, 1, 2).shadow()
 print(c)
 #          .####..
 #          #.&&&#.
@@ -856,7 +856,7 @@ print(bitmap)
 #### Examples
 
 ```python
-c = Font('fonts/unifont-13.0.04.bdf').glyph("c").draw().crop(6, 8, 1, 2).shadow()
+c = Font('tests/fonts/unifont-13.0.04.bdf').glyph("c").draw().crop(6, 8, 1, 2).shadow()
 print(c)  # same as print(str(c))
 #         .####..
 #         #.&&&#.

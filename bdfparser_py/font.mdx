@@ -18,9 +18,9 @@ Font(arg)
 
 ```python
 from bdfparser import Font
-font = Font('fonts/unifont-13.0.04.bdf')
+font = Font('tests/fonts/unifont-13.0.04.bdf')
 # same as:
-# font = Font(open('fonts/unifont-13.0.04.bdf'))
+# font = Font(open('tests/fonts/unifont-13.0.04.bdf'))
 ```
 
 #### Parameters
@@ -263,11 +263,11 @@ See also [Wikipedia article "Unicode block"](https://en.wikipedia.org/wiki/Unico
 
 #### Return value
 
-(*iterator* of *Glyph* objects) An *iterator* of glyphs as [*Glyph*](glyph) objects
+(*iterator* of [*Glyph*](glyph) objects/`None`) An *iterator* of glyphs as [*Glyph*](glyph) objects. Missing glyphs are replaced by `None`
 
 #### Description
 
-This method returns an iterator of all the glyphs (as [*Glyph*](glyph) objects) in the font (default) or in the specified codepoint range in the font, sorted by the specified order (or by the ascending codepoint order by default)
+This method returns an iterator of all the glyphs (as [*Glyph*](glyph) objects) in the font (default) or in the specified codepoint range in the font, sorted by the specified order (or by the ascending codepoint order by default).
 
 ## `.itercps()`
 
@@ -294,7 +294,7 @@ See [`.iterglyphs()`](#iterglyphs)'s "Parameters" section
 
 #### Description
 
-This method is almost identical to [`.iterglyphs()`](#iterglyphs), except it returns an *iterator* of glyph codepoints instead of an *iterator* of *Glyph* objects
+This method is almost identical to [`.iterglyphs()`](#iterglyphs), except it returns an *iterator* of glyph codepoints instead of an *iterator* of [*Glyph*](glyph) objects.
 
 ## `.glyph()`
 
@@ -320,11 +320,12 @@ print(glyph_a)
 
 #### Return value
 
-[*Glyph*](glyph) object
+* [*Glyph*](glyph) object
+* `None` if the glyph does not exist in the font
 
 #### Description
 
-Get a glyph (as Glyph object) by its character
+Get a glyph (as Glyph object) by its character.
 
 ## `.glyphbycp()`
 
@@ -349,18 +350,51 @@ glyph_a = font.glyphbycp(97)
 
 #### Return value
 
-[*Glyph*](glyph) object
+* [*Glyph*](glyph) object
+* `None` if the glyph does not exist in the font
 
 #### Description
 
-Get a glyph (as Glyph object) by its codepoint
+Get a glyph (as Glyph object) by its codepoint.
+
+## `.lacksglyphs()`
+
+#### Syntax
+
+```python
+.lacksglyphs(string)
+```
+
+#### Examples
+
+```python
+# This font only has latin and arabic support
+testfont = Font('tests/fonts/unifont-13.0.04-for-test.bdf')
+testfont.lacksglyphs('Bé H好Δiب')  # ['好', 'Δ']
+testfont.lacksglyphs('Bé Hiب')  # None
+```
+
+#### Parameters
+
+| Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
+| :-- |:-- | :-- | :-- | :-- |
+| `string` | Required | *string* | *N/A* | *string* (one or more characters) |
+
+#### Return value
+
+* (*list* of *strings*) *list* of missing glyph(s)' characters
+* `None` if all the glyphs in your *string* exist in the font
+
+#### Description
+
+Check if there is any missing glyph and gets these glyphs' character.
 
 ## `.draw()`
 
 #### Syntax
 
 ```python
-.draw(string, linelimit, mode, direction, usecurrentglyphspacing)
+.draw(string, linelimit, mode, direction, usecurrentglyphspacing, missing)
 ```
 
 #### Examples
@@ -374,6 +408,14 @@ self.font.draw('Bdf Hi', mode=0)
 self.font.draw('مرحبا', direction='rl')
 # each line has 30 pixels instead of 512 by default:
 font.draw('Bdf Hi', linelimit=30)
+
+# This font only has latin and arabic support
+testfont = Font('tests/fonts/unifont-13.0.04-for-test.bdf')
+# You can optionnally specify the missing glyphs' replacement
+# instead of a 0-width-and-height empty glyph by default
+testfont.draw('Bé H好Δi的',
+  missing={'glyphname': 'missing glyph', 'codepoint': 0, 'bbw': 16, 'bbh': 16, 'bbxoff': 0, 'bbyoff': -2, 'swx0': 1000, 'swy0': 0, 'dwx0': 16, 'dwy0': 0, 'swx1': None, 'swy1': None, 'dwx1': None, 'dwy1': None, 'vvectorx': None, 'vvectory': None, 'hexdata': ['0000', '0000', '0000', '3ff8', '3018', '2828', '2448', '2288', '2108', '2288', '2448', '2828', '3018', '3ff8', '0000', '0000']}
+)  # the missing replacement is "⌧" ("x" in a rectangle box)
 ```
 
 #### Parameters
@@ -385,6 +427,7 @@ font.draw('Bdf Hi', linelimit=30)
 | `mode` | Optional | *integer* | `1` | `0`: uses [ffb](../bdf_spec/file_format/global_font_info#fontboundingbox), glyphs will be fixed-width (monospace) and -height<br />`1`: uses [dwidth](../bdf_spec/file_format/individual_glyph_info#dwidth) horizontally, [dwidth1](../bdf_spec/file_format/individual_glyph_info#dwidth1) vertically |
 | `direction` | Optional | *string* | `'lrtb'` | Writing direction. See below |
 | `usecurrentglyphspacing` | Optional | *boolean* | `False` | Useful when `direction='rl'`. For example, `font.draw('a的', direction='rl')` will misplace the wider "的" on the narrower "U" because normally we use the previous glyph's spacing ([dwidth](../bdf_spec/file_format/individual_glyph_info#dwidth)). You can use `font.draw('a的', direction='rl', usecurrentglyphspacing=True)` to use the current one and solve the problem |
+| `missing` | Optional | *dictionary* or [*Glyph*](glyph) object | An empty glyph with hexdata `[]` and metrics all `0` | The missing glyphs will be replaced by this one. It can be a *dictionary* of glyph meta information, or a [*Glyph*](glyph) object |
 
 `direction`:
 * `'lrtb'` or `'lr'`: left to right, lines from top to bottom (most common direction)
@@ -402,14 +445,20 @@ font.draw('Bdf Hi', linelimit=30)
 
 #### Description
 
-Draw (render) the glyphs of the specified words / setences / paragraphs (as a *string*), to a *Bitmap* object
+Draw (render) the glyphs of the specified words / setences / paragraphs (as a *string*), to a *Bitmap* object.
+
+:::note
+
+See the `missing` parameter if you need to handle potentially missing glyphs.
+
+:::
 
 ## `.drawcps()`
 
 #### Syntax
 
 ```python
-.drawcps(cps, linelimit, mode, direction, usecurrentglyphspacing)
+.drawcps(cps, linelimit, mode, direction, usecurrentglyphspacing, missing)
 ```
 
 #### Examples
