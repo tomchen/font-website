@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{78:function(e){e.exports=JSON.parse('{"pluginId":"font_template","version":"current","label":"Next","isLast":true,"docsSidebars":{"sidebar":[{"type":"link","label":"Font Template","href":"/font_template/"}]},"permalinkToSidebar":{"/font_template/":"sidebar"}}')}}]);
