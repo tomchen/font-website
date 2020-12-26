@@ -19,5 +19,5 @@ indent_size = 4
 [*.sln]
 indent_style = tab
 
-[*.md]
+[*.{md,mdx}]
 trim_trailing_whitespace = false
