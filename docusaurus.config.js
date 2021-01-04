@@ -1,7 +1,6 @@
 module.exports = {
   title: 'Font & Typography',
-  tagline:
-    "Tom Chen's Font Library, Tutorial, Collection Website",
+  tagline: "Tom Chen's Font Library, Tutorial, Collection Website",
   url: 'https://font.tomchen.org',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -13,7 +12,7 @@ module.exports = {
     navbar: {
       title: 'Font & Typography',
       logo: {
-        alt: "Font & Typography",
+        alt: 'Font & Typography',
         src: 'img/logo.svg',
       },
       items: [
@@ -98,46 +97,50 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Standard Font',
           items: [
             {
-              label: 'Style Guide',
-              to: 'bdf_spec/',
-            },
-            {
-              label: 'Second Doc',
+              label: 'Font Template (Illustrator + FontForge)',
               to: 'bdf_spec/',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Bitmap Font',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'BDF Parser (Python)',
+              to: 'bdfparser_py/',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: 'BDF Specification',
+              to: 'bdf_spec/',
             },
           ],
         },
         {
-          title: 'More',
+          title: 'Social',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/tomchen/font-website',
+              label: 'This website on GitHub',
+            },
+            {
+              href: 'https://github.com/tomchen/bdfparser',
+              label: 'BDF Parser (Python) on GitHub',
+            },
+            {
+              href: 'https://github.com/tomchen/font-template',
+              label: 'Font Template on GitHub',
+            },
+            {
+              href: 'https://github.com/tomchen',
+              label: '@tomchen on GitHub',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Tom Chen`,
     },
   },
   presets: [
@@ -220,6 +223,6 @@ module.exports = {
         showLastUpdateTime: false,
       },
     ],
-    'docusaurus-plugin-sass'
+    'docusaurus-plugin-sass',
   ],
 }

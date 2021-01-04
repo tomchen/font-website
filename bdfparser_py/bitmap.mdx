@@ -192,6 +192,8 @@ bitmap_quoteright.crop(7, 4, -1, 1)
 
 The *Bitmap* object itself, which now has only the specified area as its `.bindata`.
 
+(Consider to use [`.clone()`](#clone) first, if you want to maintain the original copy of the *Bitmap* object)
+
 #### Description
 
 Crop and/or extend the bitmap.
@@ -228,6 +230,10 @@ The *Bitmap* object itself, which now has the combined bitmap as its `.bindata`.
 #### Description
 
 Overlay another bitmap over the current one.
+
+:::note
+This method mutates the *Bitmap* object. Consider to use [.clone()](#clone) first, if you want to maintain the original copy of the *Bitmap* object.
+:::
 
 ## `Bitmap.concatall()`
 
@@ -451,7 +457,7 @@ Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], direction=0,
 
 Concatenate all *Bitmap* objects in a *list*.
 
-This is a class method, meaning you need to call the method on the `Bitmap` class: `Bitmap.concatall()`
+This is a class / static method, meaning you need to call the method on the `Bitmap` class: `Bitmap.concatall()`
 
 ## `+` concat
 
@@ -504,6 +510,10 @@ The *Bitmap* object itself, which now has the combined bitmap as its `.bindata`.
 Concatenate another *Bitmap* objects to the current one.
 
 It is similar to `bitmap1 + bitmap2` and `Bitmap.concatall([bitmap1, bitmap2])`, but update the current *Bitmap* object and return it, instead of creating a new one like the other two methods.
+
+:::note
+This method mutates the *Bitmap* object. If you want to maintain the original copy of the *Bitmap* object, consider to use [Bitmap.concatall()](#bitmapconcatall), or [+ sign](#-concat), or use [.clone()](#clone) first.
+:::
 
 ## `.enlarge()`
 
