@@ -47,3 +47,26 @@
 html[data-theme='dark'] .footer--dark {
   --ifm-footer-background-color: #2b3137;
 }
+
+main details {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 1rem 0;
+  border: 0.15rem solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-pagination-nav-border-radius);
+
+  summary {
+    margin-bottom: 1rem;
+    padding: 2px 0.75rem;
+    background-color: var(--ifm-color-emphasis-300);
+    border-radius: var(--ifm-pagination-nav-border-radius);
+    outline: none;
+    transition: background-color 0.5s;
+    user-select: none;
+
+    &:hover {
+      background-color: var(--ifm-pagination-nav-color-hover);
+      cursor: pointer;
+    }
+  }
+}

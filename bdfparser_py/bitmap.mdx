@@ -6,8 +6,6 @@ sidebar_label: Bitmap object
 
 import Figure from '@site/src/components/Figure'
 
-## Overview
-
 ## `Bitmap()`
 
 #### Syntax
@@ -484,7 +482,7 @@ It's equivalent to `Bitmap.concatall([bitmap1, bitmap2])`, using default values 
 #### Syntax
 
 ```python
-.concat(bitmap, direction, align, offsetlist)
+.concat(bitmap, direction, align, offset)
 ```
 
 #### Examples
@@ -498,8 +496,9 @@ bitmap_quoteright.concat(bitmap_j)
 | Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
 | :-- |:-- | :-- | :-- | :-- |
 | `bitmap` | Required | *Bitmap* object | *N/A* | Bitmap to concatenate |
+| `offset` | Required | *integer* | `0` | Spacing offset between the glyphs. See also `offsetlist` parameter in [`Bitmap.concatall()`](#bitmapconcatall) |
 
-For the rest of the parameters (`direction`, `align` and `offsetlist`), see [`Bitmap.concatall()`](#bitmapconcatall)'s "Parameters" section
+For the rest of the parameters (`direction`, `align`), see [`Bitmap.concatall()`](#bitmapconcatall)'s "Parameters" section 
 
 #### Return value
 
@@ -651,7 +650,7 @@ Default parameters (`xoff=1, yoff=-1`) mean add a shadow which is 1 pixel right 
 #### Syntax
 
 ```python
-.glow()
+.glow(mode=0)
 ```
 
 #### Examples
@@ -666,11 +665,22 @@ bitmap_quoteright.glow()
 #         ###.....        &###&.....
 #         ##......        &##&......
 #                         .&&.......
+bitmap_quoteright.glow(1)
+#                         .&&&&&....
+#         .###....        .&###&....
+#         .###....        .&###&....
+#         .###....        .&###&....
+# before: .##..... after: &&##&&....
+#         ###.....        &###&.....
+#         ##......        &##&&.....
+#                         &&&&......
 ```
 
 #### Parameters
 
-No parameters
+| Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
+| :-- |:-- | :-- | :-- | :-- |
+| `mode` | Optional | *integer* | `0` | Mode. Corner pixels will not be filled in default mode 0 but will in mode 1 |
 
 #### Return value
 
@@ -680,7 +690,7 @@ The *Bitmap* object itself, which now has a bitmap of the original shape with gl
 
 Add glow effect to the shape in the bitmap.
 
-The glowing area is one pixel up, right, bottom and left to the original pixels, and will be filled by `'2'`s.
+The glowing area is one pixel up, right, bottom and left to the original pixels (corners will not be filled in default mode 0 but will in mode 1), and will be filled by `'2'`s.
 
 ## `.bytepad()`
 
@@ -760,7 +770,7 @@ You can't have `'2'`s when using `datatype` `4` or `5`.
 :::
 
 :::note
-If you use [NumPy](https://numpy.org/), set `datatype` to `2`. Below is a simple example, see "[Quick examples](./#quick-examples)" for another example with NumPy and [Matplotlib](https://matplotlib.org/).
+If you use [NumPy](https://numpy.org/), set `datatype` to `2`. Below is a simple example, see "[Quick examples](../#quick-examples)" for another example with NumPy and [Matplotlib](https://matplotlib.org/).
 :::
 
 ```python

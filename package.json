@@ -1,6 +1,6 @@
 {
   "name": "font-website",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tom Chen's Font Library, Tutorial, Collection Website",
   "repository": {
     "type": "git",
@@ -25,17 +25,20 @@
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.70",
     "@docusaurus/preset-classic": "2.0.0-alpha.70",
+    "@docusaurus/remark-plugin-npm2yarn": "^2.0.0-alpha.70",
+    "@docusaurus/theme-live-codeblock": "^2.0.0-alpha.70",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
     "docusaurus-plugin-sass": "^0.1.11",
+    "rc-tooltip": "^5.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "stylelint": "^13.8.0",
-    "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-config-recommended": "^3.0.0",
-    "stylelint-config-sass-guidelines": "^7.1.0"
+    "docusaurus-plugin-typedoc": "^0.9.0",
+    "typedoc": "^0.20.20",
+    "typedoc-plugin-markdown": "^3.4.5",
+    "typescript": "^4.1.3"
   },
   "browserslist": {
     "production": [

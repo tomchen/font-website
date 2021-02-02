@@ -1,0 +1,51 @@
+---
+id: readlineiter
+title: readlineiter Helper Functions
+sidebar_label: readlineiter Helper Functions
+---
+
+import BDF from '@site/src/components/BDF'
+
+## `readlineiter` helpers
+
+#### Syntax
+
+```js
+import readlineiter from 'bdfparser/readlineiter/nodefs' // or 'bdfparser/readlineiter/fetch' for browsers
+readlineiter(readlineiter)
+```
+
+#### Examples
+
+Complete example with [$Font()](font#font-shortcut)
+
+```js
+import { $Font } from 'bdfparser/index'
+import readlineiter from 'bdfparser/readlineiter/nodefs' // or 'bdfparser/readlineiter/fetch' for browsers
+(async () => {
+  const font = await $Font(readlineiter('test/fonts/unifont-13.0.04.bdf'))
+})()
+```
+
+#### Parameters
+
+| Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
+| :-- |:-- | :-- | :-- | :-- |
+| `filepath` | Required | *string* | *N/A* | Path of the text file |
+
+#### Return value
+
+*AsyncIterableIterator* An asynchronous iterable iterator representing each line in string text from the text file
+
+#### Description
+
+Read text file line by line.
+
+I wrote 3 versions and about to 
+
+In `import readlineiter from '<PATH>'`, `<PATH>` can be:
+
+* `bdfparser/readlineiter/nodefs`: with **Node.js file system** lib
+* `bdfparser/readlineiter/fetch`: with **native `fetch()`** method, to be used in modern browsers or Deno
+* `bdfparser/readlineiter/nodeget`: (**not yet available** but will be) with **Node.js HTTP get**
+* `<repo root dir>/deno/readlineiter.ts`: with **Deno file system**

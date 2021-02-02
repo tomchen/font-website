@@ -4,8 +4,6 @@ title: Font object
 sidebar_label: Font object
 ---
 
-## Overview
-
 ## `Font()`
 
 #### Syntax
@@ -248,14 +246,14 @@ The codepoint range parameter `r` accepts:
 * *integer*. Examples:
   * `128` (Basic Latin / ASCII)
   * `0x100` (Basic Latin and Latin-1 Supplement / cp1250 / cp1251 / cp1252)
-* *tuple* of *integers*. Examples:
+* *tuple* of two *integers*. Examples:
   * `(0, 127)` (same as `128`)
   * `(0, 0xff)` (same as `0x100`)
   * `(48, 57)` (all numbers 0-9)
   * `(65, 90)` (all uppercase basic latin letters A-Z)
   * `(97, 122)` (all lowercase basic latin letters a-z)
   * `(1328, 0x1032F)`
-* *list* of *tuples* of *integers*. Example:
+* *list* of *tuples* of two *integers*. Example:
   * `[(65, 90), (97, 122)]` (all basic latin letters A-Za-z)
   * `[(0x2E80, 0x9FFF), (0xA960, 0xA97F), (0xAC00, 0xD7FF), (0xF900, 0xFAFF), (0xFE30, 0xFE4F), (0xFF00, 0xFFEF), (0x20000, 0x3134F)]` (this is roughly all [CJK characters](https://en.wikipedia.org/wiki/CJK_characters) in the Unicode)
 
@@ -427,7 +425,7 @@ testfont.draw('Bé H好Δi的',
 | `mode` | Optional | *integer* | `1` | `0`: uses [ffb](../bdf_spec/file_format/global_font_info#fontboundingbox), glyphs will be fixed-width (monospace) and -height<br />`1`: uses [dwidth](../bdf_spec/file_format/individual_glyph_info#dwidth) horizontally, [dwidth1](../bdf_spec/file_format/individual_glyph_info#dwidth1) vertically |
 | `direction` | Optional | *string* | `'lrtb'` | Writing direction. See below |
 | `usecurrentglyphspacing` | Optional | *boolean* | `False` | Useful when `direction='rl'`. For example, `font.draw('a的', direction='rl')` will misplace the wider "的" on the narrower "U" because normally we use the previous glyph's spacing ([dwidth](../bdf_spec/file_format/individual_glyph_info#dwidth)). You can use `font.draw('a的', direction='rl', usecurrentglyphspacing=True)` to use the current one and solve the problem |
-| `missing` | Optional | *dictionary* or [*Glyph*](glyph) object | An empty glyph with hexdata `[]` and metrics all `0` | The missing glyphs will be replaced by this one. It can be a *dictionary* of glyph meta information, or a [*Glyph*](glyph) object |
+| `missing` | Optional | *dictionary* or [*Glyph*](glyph) object | An empty glyph with glyphname `'empty'`, codepoint `8203`, hexdata `[]` and metrics all `0` | The missing glyphs will be replaced by this one. It can be a *dictionary* of glyph meta information, or a [*Glyph*](glyph) object |
 
 `direction`:
 * `'lrtb'` or `'lr'`: left to right, lines from top to bottom (most common direction)

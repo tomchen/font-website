@@ -3,7 +3,7 @@ module.exports = {
     'index',
     {
       type: 'category',
-      label: 'BDF Parser API',
+      label: 'BDF Parser (Python) API',
       collapsed: false,
       items: ['font', 'glyph', 'bitmap'],
     },

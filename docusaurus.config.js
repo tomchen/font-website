@@ -8,6 +8,7 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'tomchen', // Usually your GitHub org/user name.
   projectName: 'font-website', // Usually your repo name.
+  themes: ['@docusaurus/theme-live-codeblock'],
   themeConfig: {
     navbar: {
       title: 'Font & Typography',
@@ -22,11 +23,11 @@ module.exports = {
           label: 'Standard Font',
           position: 'left',
           items: [
-            {
-              to: 'all/',
-              activeBasePath: 'all',
-              label: 'Standard Font',
-            },
+            // {
+            //   to: 'all/',
+            //   activeBasePath: 'all',
+            //   label: 'Standard Font',
+            // },
             {
               to: 'font_template/',
               activeBasePath: 'font_template',
@@ -42,10 +43,15 @@ module.exports = {
           label: 'Bitmap / BDF Font',
           position: 'left',
           items: [
+            // {
+            //   to: 'bitmap_font/',
+            //   activeBasePath: 'bitmap_font',
+            //   label: 'Guide to Bitmap Fonts',
+            // },
             {
-              to: 'bitmap_font/',
-              activeBasePath: 'bitmap_font',
-              label: 'Guide to Bitmap Fonts',
+              to: 'bdfparser_js/',
+              activeBasePath: 'bdfparser_js',
+              label: 'BDF Parser (TypeScript / JavaScript)',
             },
             {
               to: 'bdfparser_py/',
@@ -57,11 +63,11 @@ module.exports = {
               activeBasePath: 'bdf_spec',
               label: 'BDF Spec',
             },
-            {
-              to: 'bdf_collection/',
-              activeBasePath: 'bdf_collection',
-              label: 'Bitmap Font Collection',
-            },
+            // {
+            //   to: 'bdf_collection/',
+            //   activeBasePath: 'bdf_collection',
+            //   label: 'Bitmap Font Collection',
+            // },
           ],
         },
         {
@@ -70,20 +76,24 @@ module.exports = {
           className: 'header-github-link',
           items: [
             {
-              href: 'https://github.com/tomchen/font-website',
-              label: 'This website',
+              href: 'https://github.com/tomchen/bdfparser-js',
+              label: 'BDF Parser (TypeScript / JavaScript)',
             },
             {
               href: 'https://github.com/tomchen/bdfparser',
               label: 'BDF Parser (Python)',
             },
-            {
-              href: 'https://github.com/tomchen/bitmap-font-collection',
-              label: 'Bitmap Font Collection',
-            },
+            // {
+            //   href: 'https://github.com/tomchen/bitmap-font-collection',
+            //   label: 'Bitmap Font Collection',
+            // },
             {
               href: 'https://github.com/tomchen/font-template',
               label: 'Simple Font Template',
+            },
+            {
+              href: 'https://github.com/tomchen/font-website',
+              label: 'This website',
             },
             {
               href: 'https://github.com/tomchen',
@@ -109,6 +119,10 @@ module.exports = {
           title: 'Bitmap Font',
           items: [
             {
+              label: 'BDF Parser (TypeScript / JavaScript)',
+              to: 'bdfparser_js/',
+            },
+            {
               label: 'BDF Parser (Python)',
               to: 'bdfparser_py/',
             },
@@ -122,8 +136,8 @@ module.exports = {
           title: 'Social',
           items: [
             {
-              href: 'https://github.com/tomchen/font-website',
-              label: 'This website on GitHub',
+              href: 'https://github.com/tomchen/bdfparser-js',
+              label: 'BDF Parser (TypeScript / JavaScript) on GitHub',
             },
             {
               href: 'https://github.com/tomchen/bdfparser',
@@ -132,6 +146,10 @@ module.exports = {
             {
               href: 'https://github.com/tomchen/font-template',
               label: 'Font Template on GitHub',
+            },
+            {
+              href: 'https://github.com/tomchen/font-website',
+              label: 'This website on GitHub',
             },
             {
               href: 'https://github.com/tomchen',
@@ -163,6 +181,24 @@ module.exports = {
     ],
   ],
   plugins: [
+    // [
+    //   'docusaurus-plugin-typedoc',
+    //   {
+    //     entryPoints: ['../bdfparser-js/src/index.ts'],
+    //     tsconfig: '../bdfparser-js/tsconfig.json',
+    //     docsRoot: 'bdfparser_js',
+    //     out: 'api',
+    //     allReflectionsHaveOwnDocument: true,
+    //     readme: 'none',
+    //     categorizeByGroup: false,
+    //     sidebar: {
+    //       sidebarFile: './bdfparser_js/typedoc-sidebar.js',
+    //       fullNames: true,
+    //       readmeLabel: 'Overview',
+    //     },
+    //     categorizeByGroup: true,
+    //   },
+    // ],
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -185,6 +221,21 @@ module.exports = {
         editUrl: 'https://github.com/tomchen/font-website/edit/main/',
         showLastUpdateAuthor: false,
         showLastUpdateTime: false,
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'bdfparser_js',
+        path: 'bdfparser_js',
+        routeBasePath: 'bdfparser_js',
+        sidebarPath: require.resolve('./bdfparser_js/sidebar.js'),
+        editUrl: 'https://github.com/tomchen/font-website/edit/main/',
+        showLastUpdateAuthor: false,
+        showLastUpdateTime: false,
+        remarkPlugins: [
+          [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
+        ],
       },
     ],
     [
