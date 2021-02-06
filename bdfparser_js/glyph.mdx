@@ -4,14 +4,18 @@ title: Glyph object
 sidebar_label: Glyph object
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 import BDF from '@site/src/components/BDF'
 
-## `Glyph()`
+## `Glyph()` and `$Glyph()` shortcut
 
 #### Syntax
 
 ```js
-Glyph(meta_obj, font)
+new Glyph(meta_obj, font)
+// is equivalent to
+$Glyph(meta_obj, font)
 ```
 
 #### Parameters
@@ -29,6 +33,8 @@ Glyph(meta_obj, font)
 
 Initialize a *Glyph* object. Load a *object* of meta information and the font the glyph belongs.
 
+The shortcut `$Glyph(meta_obj, font)` is equivalent to `new Glyph(meta_obj, font)`, use it for convenience.
+
 :::note
 Usually you get the glyph object from [font.glyph(character)](font#glyph) and do not need to use `Glyph()`.
 :::
@@ -43,13 +49,47 @@ Usually you get the glyph object from [font.glyph(character)](font#glyph) and do
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-# `glyph` here is the Glyph object of "a" in Unifont v13.0.04
-glyph.meta
-# {'glyphname': 'U+0061', 'codepoint': 97, 'bbw': 8, 'bbh': 16, 'bbxoff': 0, 'bbyoff': -2, 'swx0': 500, 'swy0': 0, 'dwx0': 8, 'dwy0': 0, 'swx1': None, 'swy1': None, 'dwx1': None, 'dwy1': None, 'vvectorx': None, 'vvectory': None, 'hexdata': ['00', '00', '00', '00', '00', '00', '3C', '42', '02', '3E', '42', '42', '46', '3A', '00', '00']}
-glyph.meta['bbw']
-# 8
+const font = await $Font(getline('test/fonts/unifont-13.0.04.bdf'))
+const glyph = font.glyph('a')
+// `glyph` here is the Glyph object of "a" in Unifont v13.0.04
+
+
+
+console.log(glyph.meta)
+// { glyphname: 'U+0061', codepoint: 97, bbw: 8, bbh: 16, bbxoff: 0, bbyoff: -2, swx0: 500, swy0: 0, dwx0: 8, dwy0: 0, swx1: null, swy1: null, dwx1: null, dwy1: null, vvectorx: null, vvectory: null, hexdata: [ '00', '00', '00', '00', '00', '00', '3C', '42', '02', '3E', '42', '42', '46', '3A', '00', '00'] }
+console.log(glyph.meta.bbw)
+// 8
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+const font = await $Font(getline('test/fonts/unifont-13.0.04.bdf'))
+const glyph = font.glyph('a')
+// `glyph` here is the Glyph object of "a" in Unifont v13.0.04
+if (!glyph) {
+  throw new Error('Can\'t find the glyph')
+}
+console.log(glyph.meta)
+// { glyphname: 'U+0061', codepoint: 97, bbw: 8, bbh: 16, bbxoff: 0, bbyoff: -2, swx0: 500, swy0: 0, dwx0: 8, dwy0: 0, swx1: null, swy1: null, dwx1: null, dwy1: null, vvectorx: null, vvectory: null, hexdata: [ '00', '00', '00', '00', '00', '00', '3C', '42', '02', '3E', '42', '42', '46', '3A', '00', '00'] }
+console.log(glyph.meta.bbw)
+// 8
+```
+
+</TabItem>
+</Tabs>
 
 #### Type
 
@@ -95,10 +135,39 @@ Consider using .[draw()](#draw).[todata(4)](bitmap#todata) instead of `.meta['he
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-glyph.font().headers['fontname']
-# the name of the font the glyph belongs to, e.g. '-gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1'
+
+
+
+console.log(glyph.font.headers.fontname)
+// the name of the font the glyph belongs to,
+// e.g. '-gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1'
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+if (!glyph.font || !glyph.font.headers) {
+  throw new Error('Unable to find glyph or font')
+}
+console.log(glyph.font.headers.fontname)
+// the name of the font the glyph belongs to,
+// e.g. '-gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1'
+```
+
+</TabItem>
+</Tabs>
 
 #### Type
 
@@ -118,10 +187,31 @@ It's a reference to the glyph's font object.
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-glyph.cp()
-# 97
+console.log(glyph.cp())
+// 97
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+console.log(glyph.cp())
+// 97
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -145,10 +235,31 @@ Get the codepoint of the glyph.
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-glyph.chr()
-# 'a'
+console.log(glyph.chr())
+// 'a'
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+console.log(glyph.chr())
+// 'a'
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -174,13 +285,45 @@ Get the character of the glyph.
 
 In these examples, we use [the "quoteright" (`'`) glyph in the BDF spec's example figure 3](../bdf_spec/examples#figure-3).
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-font = Font('tests/fonts/spec_example_fixed.bdf')
-quoteright = font.glyph("'")
-print(quoteright.draw())
+const font = await $Font(getline('test/fonts/spec_example_fixed.bdf'))
+const quoteright = font.glyph("'")
+
+
+
+quoteright.draw()
 ```
 
-<details><summary>Click to see the output of <code>quoteright.draw()</code> (with default mode 0)</summary>
+</TabItem>
+<TabItem value="ts">
+
+```ts
+const font = await $Font(getline('test/fonts/spec_example_fixed.bdf'))
+const quoteright = font.glyph("'")
+if (!quoteright) {
+  throw new Error('Can\'t find quoteright glyph')
+}
+quoteright.draw()
+```
+
+</TabItem>
+</Tabs>
+
+<BDF fontfile='https://font.tomchen.org/bdfparser_fonts/spec_example_fixed.bdf' func={
+  (font) => font.glyph("'").draw()
+}/>
+
+<details><summary>Click to see the output of <code>quoteright.draw().toString()</code> (with default mode 0)</summary>
 
 ```
 .....###.
@@ -214,10 +357,14 @@ print(quoteright.draw())
 ---
 
 ```js
-print(quoteright.draw(1))
+quoteright.draw(1)
 ```
 
-<details><summary>Click to see the output of <code>quoteright.draw(1)</code></summary>
+<BDF fontfile='https://font.tomchen.org/bdfparser_fonts/spec_example_fixed.bdf' func={
+  (font) => font.glyph("'").draw(1)
+}/>
+
+<details><summary>Click to see the output of <code>quoteright.draw(1).toString()</code></summary>
 
 ```
 .###
@@ -233,10 +380,14 @@ print(quoteright.draw(1))
 ---
 
 ```js
-print(quoteright.draw(2))
+quoteright.draw(2)
 ```
 
-<details><summary>Click to see the output of <code>quoteright.draw(2)</code></summary>
+<BDF fontfile='https://font.tomchen.org/bdfparser_fonts/spec_example_fixed.bdf' func={
+  (font) => font.glyph("'").draw(2)
+}/>
+
+<details><summary>Click to see the output of <code>quoteright.draw(2).toString()</code></summary>
 
 ```
 .###....
@@ -252,10 +403,14 @@ print(quoteright.draw(2))
 ---
 
 ```js
-print(quoteright.draw(-1, (6, 17, 1, 1)))
+quoteright.draw(-1, [6, 17, 1, 1])
 ```
 
-<details><summary>Click to see the output of <code>quoteright.draw(-1, (6, 17, 1, 1))</code></summary>
+<BDF fontfile='https://font.tomchen.org/bdfparser_fonts/spec_example_fixed.bdf' func={
+  (font) => font.glyph("'").draw(-1, [6, 17, 1, 1])
+}/>
+
+<details><summary>Click to see the output of <code>quoteright.draw(-1, [6, 17, 1, 1]).toString()</code></summary>
 
 ```
 ..###.
@@ -278,6 +433,8 @@ print(quoteright.draw(-1, (6, 17, 1, 1)))
 ```
 
 </details>
+
+---
 
 #### Parameters
 
@@ -309,30 +466,56 @@ Draw the glyph to a *Bitmap* object.
 #### Syntax
 
 ```js
-.origin(mode, fromorigin, xoff, yoff)
+.origin(options)
+// options = {mode, fromorigin, xoff, yoff}
 ```
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-quoteright.origin()  # (2, 6)
-quoteright.origin(mode=1)  # (-2, -12)
-quoteright.origin(mode=2)  # (-2, -12)
-quoteright.origin(mode=-1, xoff=1, yoff=1)  # (-1, -1)
-quoteright.origin(fromorigin=True)  # (-2, -6)
-quoteright.origin(mode=1, fromorigin=True)  # (2, 12)
+console.log(quoteright.origin()) // [2, 6]
+console.log(quoteright.origin({ mode: 1 })) // [-2, -12]
+console.log(quoteright.origin({ mode: 2 })) // [-2, -12]
+console.log(quoteright.origin({ mode: -1, xoff: 1, yoff: 1 })) // [-1, -1]
+console.log(quoteright.origin({ fromorigin: true })) // [-2, -6]
+console.log(quoteright.origin({ mode: 1, fromorigin: true })) // [2, 12]
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+console.log(quoteright.origin()) // [2, 6]
+console.log(quoteright.origin({ mode: 1 })) // [-2, -12]
+console.log(quoteright.origin({ mode: 2 })) // [-2, -12]
+console.log(quoteright.origin({ mode: -1, xoff: 1, yoff: 1 })) // [-1, -1]
+console.log(quoteright.origin({ fromorigin: true })) // [-2, -6]
+console.log(quoteright.origin({ mode: 1, fromorigin: true })) // [2, 12]
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
 | Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
 | :-- |:-- | :-- | :-- | :-- |
-| `mode` | Optional | *number* | `0` | Same as [`.draw()`](#draw)'s `mode` parameter |
-| `fromorigin` | Optional | *boolean* | `False` | `False`: to the origin<br />`True`: from the origin |
-| `xoff` | Optional | *numbers* | `None` | See below |
-| `yoff` | Optional | *numbers* | `None` | See below |
+| (in `options`) `mode` | Optional | *number* | `0` | Same as [`.draw()`](#draw)'s `mode` parameter |
+| (in `options`) `fromorigin` | Optional | *boolean* | `false` | `false`: to the origin<br />`true`: from the origin |
+| (in `options`) `xoff` | Optional | *numbers* | `None` | See below |
+| (in `options`) `yoff` | Optional | *numbers* | `None` | See below |
 
-Similar to [`.draw()`](#draw), `xoff` and `yoff` parameters are useless when mode `-1` is not chosen, but if `mode=-1` in `.origin()`, you **MUST** specify `xoff` and `yoff`, which are equivalent to `bb[2]` ("bbxoff") and `bb[3]` ("bbyoff") in the method [`.draw()`](#draw).
+Similar to [`.draw()`](#draw), `xoff` and `yoff` parameters are useless when mode `-1` is not chosen, but if `mode: -1` in `.origin()`, you **MUST** specify `xoff` and `yoff`, which are equivalent to `bb[2]` ("bbxoff") and `bb[3]` ("bbyoff") in the method [`.draw()`](#draw).
 
 #### Return value
 
@@ -342,23 +525,41 @@ Similar to [`.draw()`](#draw), `xoff` and `yoff` parameters are useless when mod
 
 Get the relative position (displacement) of the origin from the left bottom corner of the bitmap drawn by the method [`.draw()`](#draw), or vice versa (i.e. displacement of the left bottom corner of the bitmap from the origin).
 
-## `str()` and `print()`
+## `.toString()`
 
 #### Syntax
 
 ```js
-str(glyph)
-print(glyph)
+.toString()
 ```
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-print(quoteright)
-# or `print(str(quoteright))`
+console.log(quoteright.toString())
 ```
 
-<details><summary>Click to see the output of <code>str(quoteright)</code></summary>
+</TabItem>
+<TabItem value="ts">
+
+```ts
+console.log(quoteright.toString())
+```
+
+</TabItem>
+</Tabs>
+
+<details><summary>Click to see the output of <code>quoteright.toString()</code></summary>
 
 ```
 .....###.
@@ -391,26 +592,76 @@ print(quoteright)
 
 #### Description
 
-(*string*) `str()` gets a human-readable (multi-line) *string* representation of the *Glyph* object. It's actually the string converted from `.draw()` with default parameters.
+(*string*) `.toString()` gets a human-readable (multi-line) *string* representation of the *Glyph* object. It's actually the string converted from `.draw()` with default parameters.
 
-`print()` prints a human-readable (multi-line) *string* representation of the *Glyph* object.
+See also [`toString()` for *Bitmap* object](bitmap#tostring)
 
-See also [`str()` and `print()` for *Bitmap* object](bitmap#str-and-print)
-
-## `repr()`
+## `.repr()`
 
 #### Syntax
 
 ```js
-repr(glyph)
+.repr()
 ```
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-print(repr(quoteright))
-# Glyph({'glyphname': 'quoteright', 'codepoint': 39, 'bbw': 4, 'bbh': 6, 'bbxoff': 2, 'bbyoff': 12, 'swx0': 223, 'swy0': 0, 'dwx0': 5, 'dwy0': 0, 'swx1': None, 'swy1': None, 'dwx1': None, 'dwy1': None, 'vvectorx': None, 'vvectory': None, 'hexdata': ['70', '70', '70', '60', 'E0', 'C0']}, <bdfparser.Font object at 0x0000015314D3E490>)
+console.log(quoteright.repr())
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+console.log(quoteright.repr())
+```
+
+</TabItem>
+</Tabs>
+
+<details><summary>Click to see the output of <code>quoteright.repr()</code></summary>
+
+```js
+Glyph({
+  "glyphname": "quoteright",
+  "codepoint": 39,
+  "bbw": 4,
+  "bbh": 6,
+  "bbxoff": 2,
+  "bbyoff": 12,
+  "swx0": 223,
+  "swy0": 0,
+  "dwx0": 5,
+  "dwy0": 0,
+  "swx1": null,
+  "swy1": null,
+  "dwx1": null,
+  "dwy1": null,
+  "vvectorx": null,
+  "vvectory": null,
+  "hexdata": [
+    "70",
+    "70",
+    "70",
+    "60",
+    "E0",
+    "C0"
+  ]
+}, Font(<Helvetica-BoldOblique>)
+```
+
+</details>
 
 #### Description
 

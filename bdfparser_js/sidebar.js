@@ -6,7 +6,7 @@ module.exports = {
       type: 'category',
       label: 'BDF Parser (TS/JS) API',
       collapsed: false,
-      items: ['font', 'glyph', 'bitmap', 'readlineiter'],
+      items: ['font', 'glyph', 'bitmap'],
     },
     {
       type: 'category',

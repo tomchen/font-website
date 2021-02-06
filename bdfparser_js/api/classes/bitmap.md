@@ -10,7 +10,7 @@ hide_title: true
 
 `Bitmap` object
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap](http://localhost:3000/bdfparser_js/bitmap)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap](https://font.tomchen.org/bdfparser_js/bitmap)
 
 ## Hierarchy
 
@@ -24,7 +24,7 @@ hide_title: true
 
 Initialize a `Bitmap` object. Load binary bitmap data (`array` of `string`s).
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#bitmap](http://localhost:3000/bdfparser_js/bitmap#bitmap)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap](https://font.tomchen.org/bdfparser_js/bitmap)
 
 #### Parameters:
 
@@ -34,7 +34,7 @@ Name | Type | Description |
 
 **Returns:** [*Bitmap*](bitmap.md)
 
-Defined in: bdfparser.ts:1184
+Defined in: [bdfparser.ts:1188](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1188)
 
 ## Properties
 
@@ -42,7 +42,7 @@ Defined in: bdfparser.ts:1184
 
 • **bindata**: *string*[]
 
-Defined in: bdfparser.ts:1184
+Defined in: [bdfparser.ts:1188](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1188)
 
 ## Methods
 
@@ -54,7 +54,7 @@ Pad each line (row) to multiple of 8 (or other numbers) bits/pixels, with `'0'`s
 
 Do this before using the bitmap for a glyph in a BDF font.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#bytepad](http://localhost:3000/bdfparser_js/bitmap#bytepad)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#bytepad](https://font.tomchen.org/bdfparser_js/bitmap#bytepad)
 
 #### Parameters:
 
@@ -66,7 +66,7 @@ Name | Type | Description |
 
 The `Bitmap` object itself, which now has the altered bitmap as its `.bindata`
 
-Defined in: bdfparser.ts:1730
+Defined in: [bdfparser.ts:1734](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1734)
 
 ___
 
@@ -76,13 +76,13 @@ ___
 
 Get a deep copy / clone of the `Bitmap` object.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#clone](http://localhost:3000/bdfparser_js/bitmap#clone)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#clone](https://font.tomchen.org/bdfparser_js/bitmap#clone)
 
 **Returns:** [*Bitmap*](bitmap.md)
 
 A deep copy of the original `Bitmap` object
 
-Defined in: bdfparser.ts:1252
+Defined in: [bdfparser.ts:1256](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1256)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 Concatenate another `Bitmap` objects to the current one.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#concat](http://localhost:3000/bdfparser_js/bitmap#concat)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#concat](https://font.tomchen.org/bdfparser_js/bitmap#concat)
 
 #### Parameters:
 
@@ -105,7 +105,7 @@ Name | Type | Default value | Description |
 
 The `Bitmap` object itself, which now has the combined bitmap as its `.bindata`
 
-Defined in: bdfparser.ts:1534
+Defined in: [bdfparser.ts:1538](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1538)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 Crop and/or extend the bitmap.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#crop](http://localhost:3000/bdfparser_js/bitmap#crop)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#crop](https://font.tomchen.org/bdfparser_js/bitmap#crop)
 
 #### Parameters:
 
@@ -130,7 +130,7 @@ Name | Type | Description |
 
 The `Bitmap` object itself, which now has only the specified area as its `.bindata`
 
-Defined in: bdfparser.ts:1376
+Defined in: [bdfparser.ts:1380](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1380)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 Draw the bitmap to HTML canvas
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#draw2canvas](http://localhost:3000/bdfparser_js/bitmap#draw2canvas)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#draw2canvas](https://font.tomchen.org/bdfparser_js/bitmap#draw2canvas)
 
 #### Parameters:
 
@@ -153,7 +153,7 @@ Name | Type | Description |
 
 The `Bitmap` object itself
 
-Defined in: bdfparser.ts:1802
+Defined in: [bdfparser.ts:1806](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1806)
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 Enlarge a `Bitmap` object, by multiplying every pixel in x (right) direction and in y (top) direction.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#enlarge](http://localhost:3000/bdfparser_js/bitmap#enlarge)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#enlarge](https://font.tomchen.org/bdfparser_js/bitmap#enlarge)
 
 #### Parameters:
 
@@ -176,7 +176,7 @@ Name | Type | Description |
 
 The `Bitmap` object itself, which now has the enlarged bitmap as its `.bindata`
 
-Defined in: bdfparser.ts:1589
+Defined in: [bdfparser.ts:1593](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1593)
 
 ___
 
@@ -188,7 +188,7 @@ Add glow effect to the shape in the bitmap.
 
 The glowing area is one pixel up, right, bottom and left to the original pixels (corners will not be filled in default mode 0 but will in mode 1), and will be filled by `'2'`s.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#glow](http://localhost:3000/bdfparser_js/bitmap#glow)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#glow](https://font.tomchen.org/bdfparser_js/bitmap#glow)
 
 #### Parameters:
 
@@ -200,7 +200,7 @@ Name | Type | Description |
 
 The `Bitmap` object itself, which now has a bitmap of the original shape with glow effect as the `Bitmap` object's `.bindata`
 
-Defined in: bdfparser.ts:1686
+Defined in: [bdfparser.ts:1690](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1690)
 
 ___
 
@@ -210,13 +210,13 @@ ___
 
 Get the height of the bitmap.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#height](http://localhost:3000/bdfparser_js/bitmap#height)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#height](https://font.tomchen.org/bdfparser_js/bitmap#height)
 
 **Returns:** *number*
 
 Height of the bitmap
 
-Defined in: bdfparser.ts:1241
+Defined in: [bdfparser.ts:1245](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1245)
 
 ___
 
@@ -226,7 +226,7 @@ ___
 
 Overlay another bitmap over the current one.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#overlay](http://localhost:3000/bdfparser_js/bitmap#overlay)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#overlay](https://font.tomchen.org/bdfparser_js/bitmap#overlay)
 
 #### Parameters:
 
@@ -238,7 +238,7 @@ Name | Type | Description |
 
 The `Bitmap` object itself, which now has the combined bitmap as its `.bindata`
 
-Defined in: bdfparser.ts:1392
+Defined in: [bdfparser.ts:1396](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1396)
 
 ___
 
@@ -248,7 +248,7 @@ ___
 
 Replace a string by another in the bitmap.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#replace](http://localhost:3000/bdfparser_js/bitmap#replace)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#replace](https://font.tomchen.org/bdfparser_js/bitmap#replace)
 
 #### Parameters:
 
@@ -261,7 +261,7 @@ Name | Type | Description |
 
 The `Bitmap` object itself, which now has the altered bitmap as its `.bindata`
 
-Defined in: bdfparser.ts:1604
+Defined in: [bdfparser.ts:1608](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1608)
 
 ___
 
@@ -271,13 +271,13 @@ ___
 
 Gets a programmer-readable (multi-line) `string` representation of the `Bitmap` object.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#repr](http://localhost:3000/bdfparser_js/bitmap#repr)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#repr](https://font.tomchen.org/bdfparser_js/bitmap#repr)
 
 **Returns:** *string*
 
 String representation
 
-Defined in: bdfparser.ts:1219
+Defined in: [bdfparser.ts:1223](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1223)
 
 ___
 
@@ -289,7 +289,7 @@ Add shadow to the shape in the bitmap.
 
 The shadow will be filled by `'2'`s.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#shadow](http://localhost:3000/bdfparser_js/bitmap#shadow)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#shadow](https://font.tomchen.org/bdfparser_js/bitmap#shadow)
 
 #### Parameters:
 
@@ -302,7 +302,7 @@ Name | Type | Description |
 
 The `Bitmap` object itself, which now has a bitmap of the original shape with its shadow as the `Bitmap` object's `.bindata`
 
-Defined in: bdfparser.ts:1642
+Defined in: [bdfparser.ts:1646](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1646)
 
 ___
 
@@ -312,13 +312,13 @@ ___
 
 Gets a human-readable (multi-line) `string` representation of the `Bitmap` object.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#tostring](http://localhost:3000/bdfparser_js/bitmap#tostring)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#tostring](https://font.tomchen.org/bdfparser_js/bitmap#tostring)
 
 **Returns:** *string*
 
 String representation
 
-Defined in: bdfparser.ts:1204
+Defined in: [bdfparser.ts:1208](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1208)
 
 ___
 
@@ -328,7 +328,7 @@ ___
 
 Get the bitmap's data in the specified type and format.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#todata](http://localhost:3000/bdfparser_js/bitmap#todata)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#todata](https://font.tomchen.org/bdfparser_js/bitmap#todata)
 
 #### Type parameters:
 
@@ -346,7 +346,7 @@ Name | Type | Description |
 
 Bitmap data in the specified type (list or string) and format
 
-Defined in: bdfparser.ts:1750
+Defined in: [bdfparser.ts:1754](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1754)
 
 ___
 
@@ -356,13 +356,13 @@ ___
 
 Get the width of the bitmap.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#width](http://localhost:3000/bdfparser_js/bitmap#width)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#width](https://font.tomchen.org/bdfparser_js/bitmap#width)
 
 **Returns:** *number*
 
 Width of the bitmap
 
-Defined in: bdfparser.ts:1230
+Defined in: [bdfparser.ts:1234](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1234)
 
 ___
 
@@ -382,7 +382,7 @@ Name | Type |
 
 **Returns:** *string*[]
 
-Defined in: bdfparser.ts:1343
+Defined in: [bdfparser.ts:1347](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1347)
 
 ___
 
@@ -400,7 +400,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: bdfparser.ts:1256
+Defined in: [bdfparser.ts:1260](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1260)
 
 ___
 
@@ -418,7 +418,7 @@ Name | Type |
 
 **Returns:** *string*[]
 
-Defined in: bdfparser.ts:1552
+Defined in: [bdfparser.ts:1556](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1556)
 
 ___
 
@@ -436,7 +436,7 @@ Name | Type |
 
 **Returns:** *string*[]
 
-Defined in: bdfparser.ts:1302
+Defined in: [bdfparser.ts:1306](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1306)
 
 ___
 
@@ -454,7 +454,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: bdfparser.ts:1275
+Defined in: [bdfparser.ts:1279](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1279)
 
 ___
 
@@ -464,7 +464,7 @@ ___
 
 Concatenate all `Bitmap` objects in an `array`.
 
-**`see`** [http://localhost:3000/bdfparser_js/bitmap#bitmapconcatall](http://localhost:3000/bdfparser_js/bitmap#bitmapconcatall)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/bitmap#bitmapconcatall](https://font.tomchen.org/bdfparser_js/bitmap#bitmapconcatall)
 
 #### Parameters:
 
@@ -477,4 +477,4 @@ Name | Type | Default value | Description |
 
 `Bitmap` object
 
-Defined in: bdfparser.ts:1424
+Defined in: [bdfparser.ts:1428](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1428)

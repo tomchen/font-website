@@ -10,7 +10,7 @@ hide_title: true
 
 `Font` object
 
-**`see`** [http://localhost:3000/bdfparser_js/font](http://localhost:3000/bdfparser_js/font)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font](https://font.tomchen.org/bdfparser_js/font)
 
 ## Hierarchy
 
@@ -30,7 +30,7 @@ hide_title: true
 
 • `Private` **\_\_curline\_chars**: *null* \| *string*= null
 
-Defined in: bdfparser.ts:196
+Defined in: [bdfparser.ts:196](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L196)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • `Private` **\_\_curline\_startchar**: *null* \| *string*= null
 
-Defined in: bdfparser.ts:195
+Defined in: [bdfparser.ts:195](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L195)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • `Private` `Optional` **\_\_f**: *undefined* \| *AsyncIterableIterator*<*string*\>
 
-Defined in: bdfparser.ts:197
+Defined in: [bdfparser.ts:197](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L197)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 • `Private` **\_\_glyph\_count\_to\_check**: *null* \| *number*= null
 
-Defined in: bdfparser.ts:194
+Defined in: [bdfparser.ts:194](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L194)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 • `Private` **\_\_headers**: *Partial*<[*Headers*](../types/headers.md)\>
 
-Defined in: bdfparser.ts:191
+Defined in: [bdfparser.ts:191](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L191)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 • **glyphs**: *Map*<*number*, [*GlyphMetaInFont*](../types/glyphmetainfont.md)\>
 
-Defined in: bdfparser.ts:193
+Defined in: [bdfparser.ts:193](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L193)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 • **headers**: *undefined* \| [*Headers*](../types/headers.md)
 
-Defined in: bdfparser.ts:190
+Defined in: [bdfparser.ts:190](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L190)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 • **props**: [*Props*](../types/props.md)
 
-Defined in: bdfparser.ts:192
+Defined in: [bdfparser.ts:192](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L192)
 
 ## Accessors
 
@@ -97,13 +97,13 @@ Defined in: bdfparser.ts:192
 Same as `.length()`
 Returns how many glyphs actually exist in the font.
 
-**`see`** [http://localhost:3000/bdfparser_js/font#length](http://localhost:3000/bdfparser_js/font#length)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font#length](https://font.tomchen.org/bdfparser_js/font#length)
 
 **Returns:** *number*
 
 Actual glyph count in the font
 
-Defined in: bdfparser.ts:529
+Defined in: [bdfparser.ts:529](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L529)
 
 ## Methods
 
@@ -113,7 +113,7 @@ Defined in: bdfparser.ts:529
 
 **Returns:** *Promise*<*void*\>
 
-Defined in: bdfparser.ts:378
+Defined in: [bdfparser.ts:378](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L378)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 **Returns:** *Promise*<*void*\>
 
-Defined in: bdfparser.ts:228
+Defined in: [bdfparser.ts:228](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L228)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: bdfparser.ts:332
+Defined in: [bdfparser.ts:332](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L332)
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 **Returns:** *Promise*<*void*\>
 
-Defined in: bdfparser.ts:339
+Defined in: [bdfparser.ts:339](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L339)
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 **Returns:** *Promise*<*void*\>
 
-Defined in: bdfparser.ts:400
+Defined in: [bdfparser.ts:400](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L400)
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: bdfparser.ts:508
+Defined in: [bdfparser.ts:508](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L508)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 Draw (render) the glyphs of the specified words / setences / paragraphs (as a `string`), to a `Bitmap` object.
 
-**`see`** [http://localhost:3000/bdfparser_js/font#draw](http://localhost:3000/bdfparser_js/font#draw)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font#draw](https://font.tomchen.org/bdfparser_js/font#draw)
 
 #### Parameters:
 
@@ -186,7 +186,7 @@ Name | Type | Default value | Description |
 
 `Bitmap` object
 
-Defined in: bdfparser.ts:885
+Defined in: [bdfparser.ts:885](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L885)
 
 ___
 
@@ -196,7 +196,7 @@ ___
 
 Draw all the glyphs in the font (default) or in the specified codepoint range in the font, sorted by the specified order (or by the ascending codepoint order by default), to a `Bitmap` object.
 
-**`see`** [http://localhost:3000/bdfparser_js/font#drawall](http://localhost:3000/bdfparser_js/font#drawall)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font#drawall](https://font.tomchen.org/bdfparser_js/font#drawall)
 
 #### Parameters:
 
@@ -208,7 +208,7 @@ Name | Type | Default value |
 
 `Bitmap` object
 
-Defined in: bdfparser.ts:935
+Defined in: [bdfparser.ts:935](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L935)
 
 ___
 
@@ -218,7 +218,7 @@ ___
 
 Draw the glyphs of the specified codepoints, to a `Bitmap` object.
 
-**`see`** [http://localhost:3000/bdfparser_js/font#drawcps](http://localhost:3000/bdfparser_js/font#drawcps)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font#drawcps](https://font.tomchen.org/bdfparser_js/font#drawcps)
 
 #### Parameters:
 
@@ -231,7 +231,7 @@ Name | Type | Default value | Description |
 
 `Bitmap` object
 
-Defined in: bdfparser.ts:690
+Defined in: [bdfparser.ts:690](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L690)
 
 ___
 
@@ -241,7 +241,7 @@ ___
 
 Get a glyph (as `Glyph` object) by its character.
 
-**`see`** [http://localhost:3000/bdfparser_js/font#glyph](http://localhost:3000/bdfparser_js/font#glyph)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font#glyph](https://font.tomchen.org/bdfparser_js/font#glyph)
 
 #### Parameters:
 
@@ -253,7 +253,7 @@ Name | Type | Description |
 
 `Glyph` object, or `null` if the glyph does not exist in the font
 
-Defined in: bdfparser.ts:649
+Defined in: [bdfparser.ts:649](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L649)
 
 ___
 
@@ -263,7 +263,7 @@ ___
 
 Get a glyph (as Glyph Object) by its codepoint.
 
-**`see`** [http://localhost:3000/bdfparser_js/font#glyphbycp](http://localhost:3000/bdfparser_js/font#glyphbycp)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font#glyphbycp](https://font.tomchen.org/bdfparser_js/font#glyphbycp)
 
 #### Parameters:
 
@@ -275,7 +275,7 @@ Name | Type | Description |
 
 `Glyph` object, or `null` if the glyph does not exist in the font
 
-Defined in: bdfparser.ts:621
+Defined in: [bdfparser.ts:621](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L621)
 
 ___
 
@@ -285,7 +285,7 @@ ___
 
 Similar to `.iterglyphs()`, except it returns an `array` of glyph codepoints instead of an `iterator` of `Glyph` objects.
 
-**`see`** [http://localhost:3000/bdfparser_js/font#itercps](http://localhost:3000/bdfparser_js/font#itercps)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font#itercps](https://font.tomchen.org/bdfparser_js/font#itercps)
 
 #### Parameters:
 
@@ -298,7 +298,7 @@ Name | Type | Description |
 
 An iterator of the codepoints of glyphs
 
-Defined in: bdfparser.ts:543
+Defined in: [bdfparser.ts:543](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L543)
 
 ___
 
@@ -308,7 +308,7 @@ ___
 
 Returns an iterator of all the glyphs (as `Glyph` objects) in the font (default) or in the specified codepoint range in the font, sorted by the specified order (or by the ascending codepoint order by default).
 
-**`see`** [http://localhost:3000/bdfparser_js/font#iterglyphs](http://localhost:3000/bdfparser_js/font#iterglyphs)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font#iterglyphs](https://font.tomchen.org/bdfparser_js/font#iterglyphs)
 
 #### Parameters:
 
@@ -321,7 +321,7 @@ Name | Type | Description |
 
 An iterator of glyphs as `Glyph` objects. Missing glyphs are replaced by `null`
 
-Defined in: bdfparser.ts:603
+Defined in: [bdfparser.ts:603](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L603)
 
 ___
 
@@ -331,7 +331,7 @@ ___
 
 Check if there is any missing glyph and gets these glyphs' character.
 
-**`see`** [http://localhost:3000/bdfparser_js/font#lacksglyphs](http://localhost:3000/bdfparser_js/font#lacksglyphs)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font#lacksglyphs](https://font.tomchen.org/bdfparser_js/font#lacksglyphs)
 
 #### Parameters:
 
@@ -343,7 +343,7 @@ Name | Type | Description |
 
 List of missing glyph(s)' characters, or `null` if all the glyphs in your string exist in the font
 
-Defined in: bdfparser.ts:663
+Defined in: [bdfparser.ts:663](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L663)
 
 ___
 
@@ -353,16 +353,16 @@ ___
 
 Load the BDF font file (file line async iterator).
 
-**`see`** [http://localhost:3000/bdfparser_js/load_filelines](http://localhost:3000/bdfparser_js/load_filelines)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/font#load_filelines](https://font.tomchen.org/bdfparser_js/font#load_filelines)
 
 #### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`filelines` | *AsyncIterableIterator*<*string*\> | Asynchronous iterable iterator representing each line in string text from the font file    |
+`filelines` | *AsyncIterableIterator*<*string*\> | Asynchronous iterable iterator containing each line in string text from the font file    |
 
 **Returns:** *Promise*<[*Font*](font.md)\>
 
 The current `Font` object
 
-Defined in: bdfparser.ts:208
+Defined in: [bdfparser.ts:208](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L208)

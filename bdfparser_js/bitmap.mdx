@@ -4,33 +4,97 @@ title: Bitmap object
 sidebar_label: Bitmap object
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 import BDF from '@site/src/components/BDF'
 
-## `Bitmap()`
+## `Bitmap()` and `$Bitmap()` shortcut
 
 #### Syntax
 
 ```js
-Bitmap(bin_bitmap_list)
+new Bitmap(bin_bitmap_list)
+// is equivalent to
+$Bitmap(bin_bitmap_list)
 ```
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-bitmap_quoteright = Bitmap(['01110000',
-                            '01110000',
-                            '01110000',
-                            '01100000',
-                            '11100000',
-                            '11000000'])
-bitmap_quoteright2 = Bitmap(['01110',
-                             '02110',
-                             '01102',
-                             '10200',
-                             '01000'])
-# but usually you get the `Bitmap` object from a `Font` or its `Glyph`
-bitmap_j = Font('tests/fonts/spec_example_fixed.bdf').glyph("j").draw(mode=2)
+const bitmap_quoteright = $Bitmap([
+  '01110000',
+  '01110000',
+  '01110000',
+  '01100000',
+  '11100000',
+  '11000000',
+])
+
+const bitmap_quoteright2 = $Bitmap([
+  '01110',
+  '02110',
+  '01102',
+  '10200',
+  '01000',
+])
+
+// but usually you get the `Bitmap` object from a `Font` or its `Glyph`
+const font = await $Font(getline('test/fonts/spec_example_fixed.bdf'))
+
+
+
+const glyph_j = font.glyph('j')
+
+
+
+const bitmap_j = glyph_j.draw(2)
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+const bitmap_quoteright = $Bitmap([
+  '01110000',
+  '01110000',
+  '01110000',
+  '01100000',
+  '11100000',
+  '11000000',
+])
+
+const bitmap_quoteright2 = $Bitmap([
+  '01110',
+  '02110',
+  '01102',
+  '10200',
+  '01000',
+])
+
+// but usually you get the `Bitmap` object from a `Font` or its `Glyph`
+const font = await $Font(getline('test/fonts/spec_example_fixed.bdf'))
+if (!font) {
+  throw new Error("Can't find font")
+}
+const glyph_j = font.glyph('j')
+if (!glyph_j) {
+  throw new Error("Can't find glyph")
+}
+const bitmap_j = glyph_j.draw(2)
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -46,6 +110,8 @@ bitmap_j = Font('tests/fonts/spec_example_fixed.bdf').glyph("j").draw(mode=2)
 
 Initialize a *Bitmap* object. Load binary bitmap data (*array* of *strings*).
 
+The shortcut `$Bitmap(bin_bitmap_list)` is equivalent to `new Bitmap(bin_bitmap_list)`, use it for convenience.
+
 ## `.bindata`
 
 #### Syntax
@@ -56,14 +122,39 @@ Initialize a *Bitmap* object. Load binary bitmap data (*array* of *strings*).
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-bitmap_quoteright2.bindata
-# ['01110',
-#  '02110',
-#  '01102',
-#  '10200',
-#  '01000']
+console.log(bitmap_quoteright2.bindata)
+// ['01110',
+//  '02110',
+//  '01102',
+//  '10200',
+//  '01000']
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+console.log(bitmap_quoteright2.bindata)
+// ['01110',
+//  '02110',
+//  '01102',
+//  '10200',
+//  '01000']
+```
+
+</TabItem>
+</Tabs>
 
 #### Type
 
@@ -87,9 +178,29 @@ If you want to get the data, use API methods [.todata()](#todata) or [.tobytes()
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-bitmap_quoteright.width()  # 8
+bitmap_quoteright.width() // 8
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+bitmap_quoteright.width() // 8
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -113,9 +224,29 @@ Get the width of the bitmap.
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-bitmap_quoteright.height()  # 6
+bitmap_quoteright.height() // 6
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+bitmap_quoteright.height() // 6
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -139,11 +270,53 @@ Get the height of the bitmap.
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-cloned_bitmap_quoteright = bitmap_quoteright.clone()
-cloned_bitmap_quoteright == bitmap_quoteright  # False
-cloned_bitmap_quoteright.bindata == bitmap_quoteright.bindata  # True
+const cloned_bitmap_quoteright = bitmap_quoteright.clone()
+console.log(
+  cloned_bitmap_quoteright ===
+  bitmap_quoteright
+) // false (different object)
+console.log(
+  cloned_bitmap_quoteright.bindata ===
+    bitmap_quoteright.bindata
+) // true (bindata also different)
+console.log(
+  JSON.stringify(cloned_bitmap_quoteright.bindata) ===
+    JSON.stringify(bitmap_quoteright.bindata)
+) // true (but have same value inside)
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+const cloned_bitmap_quoteright = bitmap_quoteright.clone()
+console.log(
+  cloned_bitmap_quoteright ===
+  bitmap_quoteright
+) // false (different object)
+console.log(
+  cloned_bitmap_quoteright.bindata ===
+    bitmap_quoteright.bindata
+) // true (bindata also different)
+console.log(
+  JSON.stringify(cloned_bitmap_quoteright.bindata) ===
+    JSON.stringify(bitmap_quoteright.bindata)
+) // true (but have same value inside)
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -167,15 +340,75 @@ Get a deep copy / clone of the *Bitmap* object.
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
 bitmap_quoteright.crop(7, 4, -1, 1)
-#         .###....
-#         .###....         ..###..
-# before: .###....  after: ..###..
-#         .##.....         ..##...
-#         ###.....         .###...
-#         ##......
+//         .###....
+//         .###....         ..###..
+// before: .###....  after: ..###..
+//         .##.....         ..##...
+//         ###.....         .###...
+//         ##......
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+bitmap_quoteright.crop(7, 4, -1, 1)
+//         .###....
+//         .###....         ..###..
+// before: .###....  after: ..###..
+//         .##.....         ..##...
+//         ###.....         .###...
+//         ##......
+```
+
+</TabItem>
+</Tabs>
+
+Before:
+
+<BDF
+func={
+  (font, {$Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    return bitmap_quoteright
+  }
+}/>
+
+After:
+
+<BDF
+func={
+  (font, {$Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    return bitmap_quoteright.crop(7, 4, -1, 1)
+  }
+}/>
 
 #### Parameters
 
@@ -206,14 +439,39 @@ Crop and/or extend the bitmap.
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-Bitmap(['010',
+$Bitmap(['010',
         '201']).overlay(
-Bitmap(['100',
+$Bitmap(['100',
         '122'])).bindata
-# ['110',
-#  '122']
+// ['110',
+//  '122']
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+$Bitmap(['010',
+        '201']).overlay(
+$Bitmap(['100',
+        '122'])).bindata
+// ['110',
+//  '122']
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -248,7 +506,31 @@ Bitmap.concatall(bitmaplist, options)
 Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2])
 ```
 
-<details><summary>Click to see the output of the above code</summary>
+<BDF
+font="https://font.tomchen.org/bdfparser_fonts/spec_example_fixed.bdf"
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    const bitmap_quoteright2 = $Bitmap([
+      '01110',
+      '02110',
+      '01102',
+      '10200',
+      '01000',
+    ])
+    const bitmap_j = font.glyph('j').draw(2)
+    return Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2])
+  }
+}/>
+
+<details><summary>Click to see the `.toString()` output of the result above</summary>
 
 ```
 ..............###............
@@ -280,10 +562,34 @@ Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2])
 ---
 
 ```js
-Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], offsetlist=[-3, 4])
+Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], {offsetlist: [-3, 4]})
 ```
 
-<details><summary>Click to see the output of the above code</summary>
+<BDF
+font="https://font.tomchen.org/bdfparser_fonts/spec_example_fixed.bdf"
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    const bitmap_quoteright2 = $Bitmap([
+      '01110',
+      '02110',
+      '01102',
+      '10200',
+      '01000',
+    ])
+    const bitmap_j = font.glyph('j').draw(2)
+    return Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], {offsetlist: [-3, 4]})
+  }
+}/>
+
+<details><summary>Click to see the `.toString()` output of the result above</summary>
 
 ```
 ...........###................
@@ -315,10 +621,34 @@ Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], offsetlist=[
 ---
 
 ```js
-Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], direction=0)
+Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], {direction: 0})
 ```
 
-<details><summary>Click to see the output of the above code</summary>
+<BDF
+font="https://font.tomchen.org/bdfparser_fonts/spec_example_fixed.bdf"
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    const bitmap_quoteright2 = $Bitmap([
+      '01110',
+      '02110',
+      '01102',
+      '10200',
+      '01000',
+    ])
+    const bitmap_j = font.glyph('j').draw(2)
+    return Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], {direction: 0})
+  }
+}/>
+
+<details><summary>Click to see the `.toString()` output of the result above</summary>
 
 ```
 .###............
@@ -361,10 +691,34 @@ Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], direction=0)
 ---
 
 ```js
-Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], align=0)
+Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], {align: 0})
 ```
 
-<details><summary>Click to see the output of the above code</summary>
+<BDF
+font="https://font.tomchen.org/bdfparser_fonts/spec_example_fixed.bdf"
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    const bitmap_quoteright2 = $Bitmap([
+      '01110',
+      '02110',
+      '01102',
+      '10200',
+      '01000',
+    ])
+    const bitmap_j = font.glyph('j').draw(2)
+    return Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], {align: 0})
+  }
+}/>
+
+<details><summary>Click to see the `.toString()` output of the result above</summary>
 
 ```
 .###..........###........###.
@@ -396,10 +750,34 @@ Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], align=0)
 ---
 
 ```js
-Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], direction=0, align=0)
+Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], {direction: 0, align: 0})
 ```
 
-<details><summary>Click to see the output of the above code</summary>
+<BDF
+font="https://font.tomchen.org/bdfparser_fonts/spec_example_fixed.bdf"
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    const bitmap_quoteright2 = $Bitmap([
+      '01110',
+      '02110',
+      '01102',
+      '10200',
+      '01000',
+    ])
+    const bitmap_j = font.glyph('j').draw(2)
+    return Bitmap.concatall([bitmap_quoteright, bitmap_j, bitmap_quoteright2], {direction: 0, align: 0})
+  }
+}/>
+
+<details><summary>Click to see the `.toString()` output of the result above</summary>
 
 ```
 .........###....
@@ -458,26 +836,6 @@ Concatenate all *Bitmap* objects in a *array*.
 
 This is a class / static method, meaning you need to call the method on the `Bitmap` class: `Bitmap.concatall()`
 
-## `+` concat
-
-#### Syntax
-
-```js
-bitmap1 + bitmap2
-```
-
-#### Examples
-
-```js
-combined_bitmap = bitmap_quoteright + bitmap_j
-```
-
-#### Description
-
-`+` is a shortcut of `Bitmap.concatall()`. Use `+` to concatenate two *Bitmap* objects and get a new *Bitmap* objects.
-
-It's equivalent to `Bitmap.concatall([bitmap1, bitmap2])`, using default values of all the optional parameters of `Bitmap.concatall()`. `bitmap1` won't change
-
 ## `.concat()`
 
 #### Syntax
@@ -489,9 +847,29 @@ It's equivalent to `Bitmap.concatall([bitmap1, bitmap2])`, using default values 
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
 bitmap_quoteright.concat(bitmap_j)
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+bitmap_quoteright.concat(bitmap_j)
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -510,10 +888,10 @@ The *Bitmap* object itself, which now has the combined bitmap as its `.bindata`.
 
 Concatenate another *Bitmap* objects to the current one.
 
-It is similar to `bitmap1 + bitmap2` and `Bitmap.concatall([bitmap1, bitmap2])`, but update the current *Bitmap* object and return it, instead of creating a new one like the other two methods.
+It is similar to `Bitmap.concatall([bitmap1, bitmap2])`, but update the current *Bitmap* object and return it, instead of creating a new one like the other two methods.
 
 :::note
-This method mutates the *Bitmap* object. If you want to maintain the original copy of the *Bitmap* object, consider to use [Bitmap.concatall()](#bitmapconcatall), or [+ sign](#-concat), or use [.clone()](#clone) first.
+This method mutates the *Bitmap* object. If you want to maintain the original copy of the *Bitmap* object, consider to use [Bitmap.concatall()](#bitmapconcatall) or [.clone()](#clone) first.
 :::
 
 ## `.enlarge()`
@@ -526,15 +904,75 @@ This method mutates the *Bitmap* object. If you want to maintain the original co
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
 bitmap_quoteright.enlarge(3, 1)
-#         .###....        ...#########............
-#         .###....        ...#########............
-# before: .###.... after: ...#########............
-#         .##.....        ...######...............
-#         ###.....        #########...............
-#         ##......        ######..................
+//         .###....        ...#########............
+//         .###....        ...#########............
+// before: .###.... after: ...#########............
+//         .##.....        ...######...............
+//         ###.....        #########...............
+//         ##......        ######..................
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+bitmap_quoteright.enlarge(3, 1)
+//         .###....        ...#########............
+//         .###....        ...#########............
+// before: .###.... after: ...#########............
+//         .##.....        ...######...............
+//         ###.....        #########...............
+//         ##......        ######..................
+```
+
+</TabItem>
+</Tabs>
+
+Before:
+
+<BDF
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    return bitmap_quoteright
+  }
+}/>
+
+After:
+
+<BDF
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    return bitmap_quoteright.enlarge(3, 1)
+  }
+}/>
 
 #### Parameters
 
@@ -561,12 +999,35 @@ Enlarge a *Bitmap* object, by multiplying every pixel in x (right) direction and
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-Bitmap(['0121',
+$Bitmap(['0121',
         '2200']).replace(2, 1).bindata
-# ['0111',
-#  '1100']
+// ['0111',
+//  '1100']
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+$Bitmap(['0121',
+        '2200']).replace(2, 1).bindata
+// ['0111',
+//  '1100']
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -593,16 +1054,77 @@ Replace a string by another in the bitmap. Because the bitmap's data is stored a
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
 bitmap_quoteright.shadow(2, -1)
-#         .###....        .###......
-#         .###....        .###&&....
-#         .###....        .###&&....
-# before: .##..... after: .##&&&....
-#         ###.....        ###&&.....
-#         ##......        ##&&&.....
-#                         ..&&......
+//         .###....        .###......
+//         .###....        .###&&....
+//         .###....        .###&&....
+// before: .##..... after: .##&&&....
+//         ###.....        ###&&.....
+//         ##......        ##&&&.....
+//                         ..&&......
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+bitmap_quoteright.shadow(2, -1)
+//         .###....        .###......
+//         .###....        .###&&....
+//         .###....        .###&&....
+// before: .##..... after: .##&&&....
+//         ###.....        ###&&.....
+//         ##......        ##&&&.....
+//                         ..&&......
+```
+
+</TabItem>
+</Tabs>
+
+Before:
+
+<BDF
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    return bitmap_quoteright
+  }
+}/>
+
+After:
+
+<BDF
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    return bitmap_quoteright.shadow(2, -1)
+  }
+}/>
 
 #### Parameters
 
@@ -633,26 +1155,114 @@ Default parameters (`xoff=1, yoff=-1`) mean add a shadow which is 1 pixel right 
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
 bitmap_quoteright.glow()
-#                         ..&&&.....
-#         .###....        .&###&....
-#         .###....        .&###&....
-#         .###....        .&###&....
-# before: .##..... after: .&##&.....
-#         ###.....        &###&.....
-#         ##......        &##&......
-#                         .&&.......
+//                                          ..&&&.....
+//         .###....                         .&###&....
+//         .###....                         .&###&....
+//         .###....                         .&###&....
+// before: .##..... after (default mode 0): .&##&.....
+//         ###.....                         &###&.....
+//         ##......                         &##&......
+//                                          .&&.......
 bitmap_quoteright.glow(1)
-#                         .&&&&&....
-#         .###....        .&###&....
-#         .###....        .&###&....
-#         .###....        .&###&....
-# before: .##..... after: &&##&&....
-#         ###.....        &###&.....
-#         ##......        &##&&.....
-#                         &&&&......
+//                                          .&&&&&....
+//                                          .&###&....
+//                                          .&###&....
+//                                          .&###&....
+//                          after (mode 1): &&##&&....
+//                                          &###&.....
+//                                          &##&&.....
+//                                          &&&&......
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+bitmap_quoteright.glow()
+//                                          ..&&&.....
+//         .###....                         .&###&....
+//         .###....                         .&###&....
+//         .###....                         .&###&....
+// before: .##..... after (default mode 0): .&##&.....
+//         ###.....                         &###&.....
+//         ##......                         &##&......
+//                                          .&&.......
+bitmap_quoteright.glow(1)
+//                                          .&&&&&....
+//                                          .&###&....
+//                                          .&###&....
+//                                          .&###&....
+//                          after (mode 1): &&##&&....
+//                                          &###&.....
+//                                          &##&&.....
+//                                          &&&&......
+```
+
+</TabItem>
+</Tabs>
+
+Before:
+
+<BDF
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    return bitmap_quoteright
+  }
+}/>
+
+After (default mode `0`):
+
+<BDF
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    return bitmap_quoteright.glow()
+  }
+}/>
+
+After (mode `1`):
+
+<BDF
+func={
+  (font, {Bitmap, $Bitmap}) => {
+    const bitmap_quoteright = $Bitmap([
+      '01110000',
+      '01110000',
+      '01110000',
+      '01100000',
+      '11100000',
+      '11000000',
+    ])
+    return bitmap_quoteright.glow(1)
+  }
+}/>
 
 #### Parameters
 
@@ -680,14 +1290,39 @@ The glowing area is one pixel up, right, bottom and left to the original pixels 
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
 bitmap_quoteright2.bytepad().bindata
-#        ['01110',       ['01110000',
-#         '02110',        '02110000',
-# before: '01102', after: '01102000',
-#         '10200',        '10200000',
-#         '01000']        '01000000']
+//        ['01110',       ['01110000',
+//         '02110',        '02110000',
+// before: '01102', after: '01102000',
+//         '10200',        '10200000',
+//         '01000']        '01000000']
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+bitmap_quoteright2.bytepad().bindata
+//        ['01110',       ['01110000',
+//         '02110',        '02110000',
+// before: '01102', after: '01102000',
+//         '10200',        '10200000',
+//         '01000']        '01000000']
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -717,16 +1352,43 @@ Parameter `bits` is `8` by default because 1 byte = 8 bits, you can change it if
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-bitmap1 = Bitmap(['00010', '11010', '00201'])
-bitmap2 = Bitmap(['00010', '11010'])
-bitmap1.todata(0)  # '00010\n11010\n00201'
-bitmap1.todata()   # ['00010', '11010', '00201']
-bitmap1.todata(2)  # [[0, 0, 0, 1, 0], [1, 1, 0, 1, 0], [0, 0, 2, 0, 1]]
-bitmap1.todata(3)  # [0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 1]
-bitmap2.todata(4)  # ['02', '1a']
-bitmap2.todata(5)  # [2, 26]
+const bitmap1 = $Bitmap(['00010', '11010', '00201'])
+const bitmap2 = $Bitmap(['00010', '11010'])
+bitmap1.todata(0) // '00010\n11010\n00201'
+bitmap1.todata()  // ['00010', '11010', '00201']
+bitmap1.todata(2) // [[0, 0, 0, 1, 0], [1, 1, 0, 1, 0], [0, 0, 2, 0, 1]]
+bitmap1.todata(3) // [0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 1]
+bitmap2.todata(4) // ['02', '1a']
+bitmap2.todata(5) // [2, 26]
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+const bitmap1 = $Bitmap(['00010', '11010', '00201'])
+const bitmap2 = $Bitmap(['00010', '11010'])
+bitmap1.todata(0) // '00010\n11010\n00201'
+bitmap1.todata()  // ['00010', '11010', '00201']
+bitmap1.todata(2) // [[0, 0, 0, 1, 0], [1, 1, 0, 1, 0], [0, 0, 2, 0, 1]]
+bitmap1.todata(3) // [0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 1]
+bitmap2.todata(4) // ['02', '1a']
+bitmap2.todata(5) // [2, 26]
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -747,15 +1409,6 @@ bitmap2.todata(5)  # [2, 26]
 You can't have `'2'`s when using `datatype` `4` or `5`.
 :::
 
-:::note
-If you use [NumPy](https://numpy.org/), set `datatype` to `2`. Below is a simple example, see "[Quick examples](../#quick-examples)" for another example with NumPy and [Matplotlib](https://matplotlib.org/).
-:::
-
-```js
-import numpy
-nparr = numpy.array(bitmap1.todata(2))
-```
-
 #### Return value
 
 Bitmap data in the specified type (*array* or *string*) and format
@@ -764,66 +1417,212 @@ Bitmap data in the specified type (*array* or *string*) and format
 
 Get the bitmap's data in the specified type and format.
 
-## `str()` and `print()`
+## `.draw2canvas()`
 
 #### Syntax
 
 ```js
-str(bitmap)
-print(bitmap)
+.draw2canvas(context, pixelcolors)
 ```
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-c = Font('tests/fonts/unifont-13.0.04.bdf').glyph("c").draw().crop(6, 8, 1, 2).shadow()
-print(c)  # same as print(str(c))
-#         .####..
-#         #.&&&#.
-#         #&....&
-#         #&.....
-# output: #&.....
-#         #&.....
-#         #&...#.
-#         .####.&
-#         ..&&&&.
+// <canvas id="mycanvas"></canvas> in HTML
+const canvas = document.getElementById('mycanvas')
+const context = canvas.getContext('2d')
+const glowing_bitmap_quoteright = bitmap_quoteright.glow(1)
+glowing_bitmap_quoteright.draw2canvas(context)
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+// <canvas id="mycanvas"></canvas> in HTML
+const canvas = document.getElementById('mycanvas')
+const context = canvas.getContext('2d')
+const glowing_bitmap_quoteright = bitmap_quoteright.glow(1)
+glowing_bitmap_quoteright.draw2canvas(context)
+```
+
+</TabItem>
+</Tabs>
+
+#### Parameters
+
+| Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
+| :-- |:-- | :-- | :-- | :-- |
+| `context` | Required | *CanvasContext* | *N/A* | Canvas context, see above example |
+| `pixelcolors` | Optional | *object* | see below | Pixel color map |
+
+By default, parameter `pixelcolors` is set to:
+
+```js
+{
+  '0': null,
+  '1': 'black',
+  '2': 'red',
+}
+```
+
+`'0'` defines background color, `'1'` defines foreground color, `'2'` defines shadow or glowing effect color. The color can be hex color value (e.g. `#000000`), [CSS color keyword](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) or anything [CanvasRenderingContext2D.fillStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle) accepts.
+
+#### Return value
+
+The *Bitmap* object itself.
 
 #### Description
 
-(*string*) `str()` gets a human-readable (multi-line) *string* representation of the *Bitmap* object.
+Draw the bitmap to HTML `<canvas>` element.
 
-`print()` prints a human-readable (multi-line) *string* representation of the *Bitmap* object.
+## `.toString()`
 
-The following digits in the bitmap's binary-encoded *string* *array* data are replaced in `str()` and `print()`'s output:
+#### Syntax
+
+```js
+.toString()
+```
+
+#### Examples
+
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
+```js
+const font = await $Font(getline('test/fonts/unifont-13.0.04.bdf'))
+
+
+
+const c_glyph = font.glyph("c")
+
+
+
+const c_bitmap = c.draw().crop(6, 8, 1, 2).shadow()
+console.log(c_bitmap.toString())
+//         .####..
+//         #.&&&#.
+//         #&....&
+//         #&.....
+// output: #&.....
+//         #&.....
+//         #&...#.
+//         .####.&
+//         ..&&&&.
+```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+const font = await $Font(getline('test/fonts/unifont-13.0.04.bdf'))
+if (!font) {
+  throw new Error('Can\'t find font')
+}
+const c_glyph = font.glyph("c")
+if (!c_glyph) {
+  throw new Error('Can\'t find glyph')
+}
+const c_bitmap = c.draw().crop(6, 8, 1, 2).shadow()
+console.log(c_bitmap.toString())
+//         .####..
+//         #.&&&#.
+//         #&....&
+//         #&.....
+// output: #&.....
+//         #&.....
+//         #&...#.
+//         .####.&
+//         ..&&&&.
+```
+
+</TabItem>
+</Tabs>
+
+#### Description
+
+(*string*) `.toString()` gets a human-readable (multi-line) *string* representation of the *Bitmap* object.
+
+The following digits in the bitmap's binary-encoded *string* *array* data are replaced in `.toString()`'s output:
 
 * `'0'`s are replaced by `#`
 * `'1'`s are replaced by `.`
 * `'2'`s are replaced by `&`
 
-## `repr()`
+## `.repr()`
 
 #### Syntax
 
 ```js
-repr(bitmap)
+.repr()
 ```
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-# use `c` again in the last example
-print(repr(c))
-#        Bitmap(['0111100',
-#                '1022210',
-#                '1200002',
-#                '1200000',
-# output:        '1200000',
-#                '1200000',
-#                '1200010',
-#                '0111102',
-#                '0022220'])
+// use `c_bitmap` again in the last example
+console.log(c_bitmap.repr())
+//        Bitmap([
+//          "0111100",
+//          "1022210",
+//          "1200002",
+// output:  "1200000",
+//          "1200000",
+//          "1200000",
+//          "1200010",
+//          "0111102",
+//          "0022220"
+//        ])
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+// use `c_bitmap` again in the last example
+console.log(c_bitmap.repr())
+//        Bitmap([
+//          "0111100",
+//          "1022210",
+//          "1200002",
+// output:  "1200000",
+//          "1200000",
+//          "1200000",
+//          "1200010",
+//          "0111102",
+//          "0022220"
+//        ])
+```
+
+</TabItem>
+</Tabs>
 
 #### Description
 

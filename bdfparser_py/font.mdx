@@ -401,9 +401,9 @@ Check if there is any missing glyph and gets these glyphs' character.
 # draw 'Bdf Hi' to a bitmap:
 font.draw('Bdf Hi')
 # each glyph could be wider when mode=0:
-self.font.draw('Bdf Hi', mode=0)
+font.draw('Bdf Hi', mode=0)
 # right to left:
-self.font.draw('مرحبا', direction='rl')
+font.draw('مرحبا', direction='rl')
 # each line has 30 pixels instead of 512 by default:
 font.draw('Bdf Hi', linelimit=30)
 

@@ -23,4 +23,4 @@ Name | Type | Description |
 
 The newly instantiated `Glyph` object
 
-Defined in: bdfparser.ts:1848
+Defined in: [bdfparser.ts:1852](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1852)

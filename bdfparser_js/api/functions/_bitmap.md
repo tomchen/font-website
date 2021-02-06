@@ -22,4 +22,4 @@ Name | Type | Description |
 
 The newly instantiated `Bitmap` object
 
-Defined in: bdfparser.ts:1859
+Defined in: [bdfparser.ts:1863](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1863)

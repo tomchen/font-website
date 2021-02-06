@@ -11,7 +11,7 @@ import BDF from '@site/src/components/BDF'
 
 ## Introduction
 
-This is a BDF (Glyph Bitmap Distribution; [Wikipedia](https://en.wikipedia.org/wiki/Glyph_Bitmap_Distribution_Format); [Spec](../bdf_spec/)) format bitmap font file parser library in TypeScript (JavaScript). It has [`Font`](font), [`Glyph`](glyph) and [`Bitmap`](bitmap) classes providing more than 30 enriched, chainable API methods of parsing BDF fonts, getting their meta information, rendering text in any writing direction, adding special effects and manipulating bitmap images. It is tested in Node.js, in browsers (so you can use HTML Canvas) and in Deno, and has detailed documentation / tutorials / API reference.
+This is a BDF (Glyph Bitmap Distribution; [Wikipedia](https://en.wikipedia.org/wiki/Glyph_Bitmap_Distribution_Format); [Spec](../bdf_spec/)) format bitmap font file parser library in TypeScript (JavaScript). It has [`Font`](font), [`Glyph`](glyph) and [`Bitmap`](bitmap) classes providing more than 30 chainable API methods of parsing BDF fonts, getting their meta information, rendering text in any writing direction, adding special effects and manipulating bitmap images. It is tested in Node.js, in browsers (so you can use HTML Canvas) and in Deno, and has detailed documentation / tutorials / API reference.
 
 You can even try the [**Live Demo & Code Editor**](editor)!
 
@@ -20,29 +20,63 @@ You can even try the [**Live Demo & Code Editor**](editor)!
 ## Installation
 
 ```bash npm2yarn
-npm install bdfparser
+npm install bdfparser readlineiter
 ```
+
+`readlineiter` is used for Node.js to read local file. You can instead use `fetchline` for browsers/Deno to fetch remote file. See [Fetch Line JavaScript packages](https://github.com/tomchen/fetchline).
 
 ## Quick examples
 
 <Tabs
-  groupId="bdfparser-js-py"
+  groupId="bdfparser-js-ts-py"
   defaultValue="js"
   values={[
-    { label: 'JavaScript (TypeScript)', value: 'js', },
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', },
     { label: 'Python', value: 'py', },
   ]
 }>
 <TabItem value="js">
 
 ```js
-import { $Font } from 'bdfparser'
-import filelines from 'bdfparser/filelines'
-(async () => {
-  const font = await $Font(filelines('test/fonts/unifont-13.0.04.bdf'))
-  console.log(`This font's global size is \
+const { $Font } = require('bdfparser')
+
+const getline = require('readlineiter')
+
+
+;(async () => {
+
+    const font = await $Font(getline('./test/fonts/unifont-13.0.04.bdf'))
+
+    console.log(`This font's global size is \
 ${font.headers.fbbx} x ${font.headers.fbby} (pixel), \
 it contains ${font.length} glyphs.`)
+
+})()
+
+
+// This font's global size is 16 x 16 (pixel), it contains 57086 glyphs.
+```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+import { $Font } from 'bdfparser'
+import getline from 'readlineiter'
+
+;(async () => {
+  try {
+    const font = await $Font(getline('./test/fonts/unifont-13.0.04.bdf'))
+    if (!font || !font.headers) {
+      throw new Error('Unable to load font')
+    }
+    console.log(`This font's global size is \
+${font.headers.fbbx} x ${font.headers.fbby} (pixel), \
+it contains ${font.length} glyphs.`)
+  } catch (error) {
+    throw error
+  }
 })()
 // This font's global size is 16 x 16 (pixel), it contains 57086 glyphs.
 ```
@@ -50,10 +84,11 @@ it contains ${font.length} glyphs.`)
 </TabItem>
 <TabItem value="py">
 
-*Python code is included here for comparison. See [Python library's documentation](../bdfparser_py/#quick-examples) for details*
+*Python code is included here only for comparison. See [Python library's documentation](../bdfparser_py/#quick-examples) for details*
 
 ```py
 from bdfparser import Font
+
 font = Font('tests/fonts/unifont-13.0.04.bdf')
 print(f"This font's global size is "
       f"{font.headers['fbbx']} x {font.headers['fbby']} (pixel), "
@@ -67,20 +102,52 @@ print(f"This font's global size is "
 Print cropped and combined "a" and "c" with shadow effect:
 
 <Tabs
-  groupId="bdfparser-js-py"
+  groupId="bdfparser-js-ts-py"
   defaultValue="js"
   values={[
-    { label: 'JavaScript (TypeScript)', value: 'js', },
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', },
     { label: 'Python', value: 'py', },
   ]
 }>
 <TabItem value="js">
 
 ```js
-const ac = font.glyph('a').draw().crop(6, 8, 1, 2).concat(
-    font.glyph('c').draw().crop(6, 8, 1, 2)
-  ).shadow()
+const a = font.glyph('a')
+const c = font.glyph('c')
+
+const ac = a
+  .draw()
+  .crop(6, 8, 1, 2)
+  .concat(c.draw().crop(6, 8, 1, 2))
+  .shadow()
+
 console.log(ac.toString())
+// .####..####..
+// #.&&&##.&&&#.
+// .&...##&....&
+// .######&.....
+// #.&&&##&.....
+// #&...##&.....
+// #&..###&...#.
+// .###.#&####.&
+// ..&&&.&.&&&&.
+```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+const a = font.glyph('a')
+const c = font.glyph('c')
+if (a && c) {
+  const ac = a
+    .draw()
+    .crop(6, 8, 1, 2)
+    .concat(c.draw().crop(6, 8, 1, 2))
+    .shadow()
+  console.log(ac.toString())
+}
 // .####..####..
 // #.&&&##.&&&#.
 // .&...##&....&
@@ -117,10 +184,11 @@ print(ac)
 Get an enlarged version (8 times both width and height) of this "ac", and render it in HTML `<canvas>` in browser with JavaScript / TypeScript <small>(or with PIL (Pillow) library in Python)</small>:
 
 <Tabs
-  groupId="bdfparser-js-py"
+  groupId="bdfparser-js-ts-py"
   defaultValue="js"
   values={[
-    { label: 'JavaScript (TypeScript)', value: 'js', },
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', },
     { label: 'Python', value: 'py', },
   ]
 }>
@@ -131,6 +199,30 @@ const ac_8x8 = ac.enlarge(8, 8)
 const ctx = canvas.getContext('2d')
 ac_8x8.draw2canvas(ctx)
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+const ac_8x8 = ac.enlarge(8, 8)
+const ctx = canvas.getContext('2d')
+ac_8x8.draw2canvas(ctx)
+```
+
+</TabItem>
+<TabItem value="py">
+
+```py
+ac_8x8 = ac * 8
+from PIL import Image
+im_ac = Image.frombytes('RGBA',
+                        (ac_8x8.width(), ac_8x8.height()),
+                        ac_8x8.tobytes('RGBA'))
+im_ac.save("ac.png", "PNG")
+```
+
+</TabItem>
+</Tabs>
 
 <BDF size={1} func={
   (font) => {
@@ -145,34 +237,14 @@ ac_8x8.draw2canvas(ctx)
   }
 }/>
 
-</TabItem>
-<TabItem value="py">
-
-```py
-ac_8x8 = ac * 8
-from PIL import Image
-im_ac = Image.frombytes('RGBA',
-                        (ac_8x8.width(), ac_8x8.height()),
-                        ac_8x8.tobytes('RGBA'))
-im_ac.save("ac.png", "PNG")
-```
-
-<Figure
-  src="bdfparser_py/ac.png"
-  position="left"
-  imgUrl={true}
-/>
-
-</TabItem>
-</Tabs>
-
 Get text "Hello!", from right to left, with glowing effect:
 
 <Tabs
-  groupId="bdfparser-js-py"
+  groupId="bdfparser-js-ts-py"
   defaultValue="js"
   values={[
-    { label: 'JavaScript (TypeScript)', value: 'js', },
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', },
     { label: 'Python', value: 'py', },
   ]
 }>
@@ -183,11 +255,13 @@ const hello = font.draw('Hello!', {direction: 'rl'}).glow()
 hello.draw2canvas(canvas.getContext('2d'))
 ```
 
-<BDF func={
-  (font) => {
-    return font.draw('Hello!', {direction: 'rl'}).glow()
-  }
-}/>
+</TabItem>
+<TabItem value="ts">
+
+```ts
+const hello = font.draw('Hello!', {direction: 'rl'}).glow()
+hello.draw2canvas(canvas.getContext('2d'))
+```
 
 </TabItem>
 <TabItem value="py">
@@ -199,19 +273,34 @@ hello = font.draw('Hello!', direction='rl').glow()
 </TabItem>
 </Tabs>
 
+<BDF func={
+  (font) => {
+    return font.draw('Hello!', {direction: 'rl'}).glow()
+  }
+}/>
+
 Save all glyphs in [Unifont](https://en.wikipedia.org/wiki/GNU_Unifont) as a black-and-white-two-color-only "font_preview.png" (with default width 512px):
 
 <Tabs
-  groupId="bdfparser-js-py"
+  groupId="bdfparser-js-ts-py"
   defaultValue="js"
   values={[
-    { label: 'JavaScript (TypeScript)', value: 'js', },
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', },
     { label: 'Python', value: 'py', },
   ]
 }>
 <TabItem value="js">
 
 ```js
+const font_preview = font.drawall()
+font_preview.draw2canvas(canvas.getContext('2d'))
+```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
 const font_preview = font.drawall()
 font_preview.draw2canvas(canvas.getContext('2d'))
 ```

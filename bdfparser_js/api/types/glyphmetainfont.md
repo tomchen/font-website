@@ -10,4 +10,4 @@ hide_title: true
 
 Ƭ **GlyphMetaInFont**: [*string*, *number*, *number*, *number*, *number*, *number*, *number* \| *null*, *number* \| *null*, *number* \| *null*, *number* \| *null*, *number* \| *null*, *number* \| *null*, *number* \| *null*, *number* \| *null*, *number* \| *null*, *number* \| *null*, *string*[]]
 
-Defined in: bdfparser.ts:29
+Defined in: [bdfparser.ts:29](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L29)

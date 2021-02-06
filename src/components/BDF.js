@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from 'react'
 import { Font, Glyph, Bitmap, $Font, $Glyph, $Bitmap } from './bdfparser/index'
-import filelines from './bdfparser/filelines/fetch'
+import fetchline from 'fetchline'
 
 const fonts = {}
 
 export default (props) => {
   const {
-    fontfile = 'http://localhost:3000/unifont-reduced.bdf',
+    fontfile = 'https://font.tomchen.org/bdfparser_fonts/unifont-reduced.bdf',
     pixelcolors,
     size = 2,
     func = () => {},
@@ -20,7 +20,7 @@ export default (props) => {
       fonts[fontfile] = new Promise((resolve, reject) => {
         ;(async () => {
           try {
-            resolve(await new Font().load_filelines(await filelines(fontfile)))
+            resolve(await new Font().load_filelines(fetchline(fontfile)))
           } catch (error) {
             reject(new Error('Cannot load font file.'))
           }
@@ -49,7 +49,7 @@ export default (props) => {
         }
       }
     } catch (error) {
-      throw error
+      console.log(error)
     }
   }, [])
 

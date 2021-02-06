@@ -4,6 +4,8 @@ title: Font object
 sidebar_label: Font object
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 import BDF from '@site/src/components/BDF'
 
 ## `Font()`
@@ -22,7 +24,7 @@ new Font()
 
 Initialize a *Font* object.
 
-The following shortcut, `$Font(filelines)`, is equivalent to `new Font().load_filelines(filelines)`, use it for convenience
+The following shortcut, `$Font(filelines)`, is equivalent to `new Font().load_filelines(filelines)`, use it for convenience.
 
 ## `$Font()` shortcut
 
@@ -34,19 +36,51 @@ $Font(filelines)
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-import { $Font } from 'bdfparser/index'
-import filelines from 'bdfparser/filelines/nodefs' // or 'bdfparser/filelines/fetch' for browsers
-(async () => {
-  const font = await $Font(filelines('test/fonts/unifont-13.0.04.bdf'))
+const { $Font } = require('bdfparser')
+const getline = require('readlineiter') // or require('fetchline') for browsers
+
+
+;(async () => {
+
+  const font = await $Font(getline('test/fonts/unifont-13.0.04.bdf'))
+  
 })()
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+import { $Font } from 'bdfparser'
+import getline from 'readlineiter' // or from 'fetchline' for browsers
+;(async () => {
+  try {
+    const font = await $Font(getline('test/fonts/unifont-13.0.04.bdf'))
+  } catch (error) {
+    throw error
+  }
+})()
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
 | Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
 | :-- |:-- | :-- | :-- | :-- |
-| `filelines` | Required | *AsyncIterableIterator* | *N/A* | Asynchronous iterable iterator representing each line in string text from the font file. You can use `bdfparser/filelines/nodefs` for node file system or `bdfparser/filelines/fetch` for browsers. See the above example |
+| `filelines` | Required | *AsyncIterableIterator<string\>* | *N/A* | Asynchronous iterable iterator representing each line in string text from the font file. Go to the [page of my Fetch Line JavaScript packages](https://github.com/tomchen/fetchline/#readme), choose `readlineiter` for node file system or `fetchline` for browsers. See the above example |
 
 #### Return value
 
@@ -56,7 +90,7 @@ import filelines from 'bdfparser/filelines/nodefs' // or 'bdfparser/filelines/fe
 
 Initialize a *Font* object and load the BDF font file (file line async iterator).
 
-`$Font(filelines)` is a shortcut for `new Font().load_filelines(filelines)`, so you don't need to write `new` and `.load_filelines`
+`$Font(filelines)` is a shortcut for `new Font().load_filelines(filelines)`, so you don't need to write `new` and [`.load_filelines`](#load_filelines)
 
 ## `.headers`
 
@@ -68,12 +102,37 @@ Initialize a *Font* object and load the BDF font file (file line async iterator)
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-font.headers
-# {'bdfversion': 2.1, 'fontname': '-gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1','fbbx': 16, 'fbby': 16, 'fbbxoff': 0, 'fbbyoff': -2, 'pointsize': 16, 'xres': 75, 'yres': 75, 'metricsset': 0}
-font.headers['fontname']
-# '-gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1'
+console.log(font.headers)
+// { bdfversion: 2.1, fontname: '-gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1', pointsize: 16, xres: 75, yres: 75, fbbx: 16, fbby: 16, fbbxoff: 0, fbbyoff: -2, metricsset: 0 }
+
+font.headers.fontname
+// -gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+console.log(font.headers)
+// { bdfversion: 2.1, fontname: '-gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1', pointsize: 16, xres: 75, yres: 75, fbbx: 16, fbby: 16, fbbxoff: 0, fbbyoff: -2, metricsset: 0 }
+
+font.headers?.fontname
+// -gnu-Unifont-Medium-R-Normal-Sans-16-160-75-75-c-80-iso10646-1
+```
+
+</TabItem>
+</Tabs>
 
 #### Type
 
@@ -83,7 +142,7 @@ font.headers['fontname']
 
 This attribute of a *Font* object represents the header information which is typically all the information before the `STARTPROPERTIES` line in the font file.
 
-Font header's names (keys), value types, and their descriptions in the [BDF spec](../bdf_spec/file_format/global_font_info):
+Font header's names (keys / property names), value types, and their descriptions in the [BDF spec](../bdf_spec/file_format/global_font_info):
 
 * `'bdfversion'`: (*number*) see [`STARTFONT`](../bdf_spec/file_format/global_font_info#startfont)
 * `'fontname'`: (*string*) see [`FONT`](../bdf_spec/file_format/global_font_info#font)
@@ -124,10 +183,31 @@ Header names are defined in the spec, property names are not.
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-font.props
-# {'add_style_name': 'Sans Serif','average_width': '80','cap_height': '10',...,'weight_name': 'Medium','x_height': '8'}
+console.log(font.props)
+// {add_style_name: 'Sans Serif', average_width: '80', cap_height: '10', ..., weight_name: 'Medium', x_height: '8'}
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+console.log(font.props)
+// {add_style_name: 'Sans Serif', average_width: '80', cap_height: '10', ..., weight_name: 'Medium', x_height: '8'}
+```
+
+</TabItem>
+</Tabs>
 
 #### Type
 
@@ -161,68 +241,65 @@ This attribute of a *Font* object represents the raw glyph data in the font.
 As raw data with values without their keys, you usually should not use it directly. Use other API methods instead, such as [.glyph()](#glyph) and [.iterglyphs()](#iterglyphs).
 :::
 
-## `.load_file_path()`
+## `.load_filelines()`
 
 #### Syntax
 
 ```js
-.load_file_path(file_path)
-```
-#### Parameters
-
-| Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
-| :-- |:-- | :-- | :-- | :-- |
-| `file_path` | Required | *string* | *N/A* | Path of the BDF font file to load |
-
-#### Return value
-
-The *Font* object itself, with font loaded
-
-#### Description
-
-Load the BDF font file in the file path.
-
-[`Font(file_path)`](#font) is equivalent to `Font().load_file_path(file_path)`.
-
-## `.load_file_obj()`
-
-#### Syntax
-
-```js
-.load_file_obj(file_obj)
+.load_filelines(filelines)
 ```
 
 #### Parameters
 
 | Name | <abbr title='required'>R</abbr>/<abbr title='optional'>O</abbr> | Type | Default Value | Description |
 | :-- |:-- | :-- | :-- | :-- |
-| `file_obj` | Required | *file object* | *N/A* | *file object* of the BDF font file to load |
+| `filelines` | Required | *AsyncIterableIterator<string\>* | *N/A* | Asynchronous iterable iterator representing each line in string text from the font file. Go to the [page of my Fetch Line JavaScript packages](https://github.com/tomchen/fetchline/#readme), choose `readlineiter` for node file system or `fetchline` for browsers. See the above example |
 
 #### Return value
 
-The *Font* object itself, with font loaded
+Promise that will be resolved with the *Font* object itself with font loaded
 
 #### Description
 
-Load the BDF font file object.
+Load the BDF font file (file line async iterator).
 
-[`Font(file_object)`](#font) is equivalent to `Font().load_file_obj(file_object)`.
+[`$Font(filelines)` shortcut](#font-shortcut) is equivalent to `new Font().load_filelines(filelines)`.
 
-## `.length()`
+## `.length`
 
 #### Syntax
 
 ```js
-.length()
+.length
 ```
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-l = font.length()
-l2 = len(font)
-l == l2  # True
+console.log(font.length)
+// 57086
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+console.log(font.length)
+// 57086
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -234,9 +311,7 @@ No parameters
 
 #### Description
 
-The method always returns how many glyphs actually exist in the font. This could be different with the glyph count number next to the 'CHARS' keyword, if so, there would be a warning when the font is loaded.
-
-`font_obj.length()` is equivalent to `len(font_obj)`.
+The getter method always returns how many glyphs actually exist in the font. This could be different with the glyph count number next to the 'CHARS' keyword, if so, there would be a warning when the font is loaded.
 
 ## `.iterglyphs()`
 
@@ -248,13 +323,39 @@ The method always returns how many glyphs actually exist in the font. This could
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-# print all basic latin letters (A-Za-z)'s character and bitmap shape, in reverse order:
-for glyph in font.iterglyphs(order=2 ,r=[(65, 90), (97, 122)]):
-    print('Character "' + glyph.chr() + '"\'s shape:')
-    print(glyph)
-# remove `order=2 ,r=[(65, 90), (97, 122)]` to print all glyphs in the font in normal ascending order
+// print all basic latin letters (A-Za-z)'s character and bitmap shape, in reverse order:
+for (const glyph of font.iterglyphs(2, [[65, 90], [97, 122],])) {
+  console.log('Character "' + glyph.chr() + '"\'s shape:')
+  console.log(glyph.toString())
+}
+// remove `order=2 ,r=[(65, 90), (97, 122)]` to print all glyphs in the font in normal ascending order
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+// print all basic latin letters (A-Za-z)'s character and bitmap shape, in reverse order:
+for (const glyph of font.iterglyphs(2, [[65, 90], [97, 122],])) {
+  console.log('Character "' + glyph?.chr() + '"\'s shape:')
+  console.log(glyph?.toString())
+}
+// remove `order=2 ,r=[(65, 90), (97, 122)]` to print all glyphs in the font in normal ascending order
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -302,10 +403,35 @@ This method returns an iterator of all the glyphs (as [*Glyph*](glyph) objects) 
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-for codepoint in font.itercps():
-    print(codepoint)
+// print every glyph's codepoint in the font
+for (const codepoint of font.itercps()) {
+  console.log(codepoint)
+}
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+// print every glyph's codepoint in the font
+for (const codepoint of font.itercps()) {
+  console.log(codepoint)
+}
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -329,11 +455,39 @@ This method is almost identical to [`.iterglyphs()`](#iterglyphs), except it ret
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-# get glyph "a" and print its shape:
-glyph_a = font.glyph('a')
-print(glyph_a)
+// get glyph "a" and print its shape:
+const glyph_a = font.glyph('a')
+console.log(glyph_a.toString())
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+// get glyph "a" and print its shape:
+const glyph_a = font.glyph('a')
+console.log(glyph_a?.toString())
+```
+
+</TabItem>
+</Tabs>
+
+<BDF func={
+  (font) => {
+    return font.glyph('a').draw()
+  }
+}/>
 
 #### Parameters
 
@@ -360,10 +514,37 @@ Get a glyph (as Glyph object) by its character.
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-# get glyph "a" whose codepoint is 97:
-glyph_a = font.glyphbycp(97)
+// get glyph "a" whose codepoint is 97:
+const glyph_a = font.glyphbycp(97)
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+// get glyph "a" whose codepoint is 97:
+const glyph_a = font.glyphbycp(97)
+```
+
+</TabItem>
+</Tabs>
+
+<BDF func={
+  (font) => {
+    return font.glyphbycp(97).draw()
+  }
+}/>
 
 #### Parameters
 
@@ -390,12 +571,35 @@ Get a glyph (as Glyph object) by its codepoint.
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-# This font only has latin and arabic support
-testfont = Font('tests/fonts/unifont-13.0.04-for-test.bdf')
-testfont.lacksglyphs('Bé H好Δiب')  # ['好', 'Δ']
-testfont.lacksglyphs('Bé Hiب')  # None
+// This font only has latin and arabic support
+const testfont = await $Font(getline('test/fonts/unifont-13.0.04-for-test.bdf'))
+console.log(testfont.lacksglyphs('Bé H好Δiب')) // ['好', 'Δ']
+console.log(testfont.lacksglyphs('Bé Hiب')) // null
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+// This font only has latin and arabic support
+const testfont = await $Font(getline('test/fonts/unifont-13.0.04-for-test.bdf'))
+console.log(testfont.lacksglyphs('Bé H好Δiب')) // ['好', 'Δ']
+console.log(testfont.lacksglyphs('Bé Hiب')) // null
+```
+
+</TabItem>
+</Tabs>
 
 #### Parameters
 
@@ -423,24 +627,85 @@ Check if there is any missing glyph and gets these glyphs' character.
 
 #### Examples
 
-```js
-# draw 'Bdf Hi' to a bitmap:
-font.draw('Bdf Hi')
-# each glyph could be wider when mode=0:
-self.font.draw('Bdf Hi', mode=0)
-# right to left:
-self.font.draw('مرحبا', direction='rl')
-# each line has 30 pixels instead of 512 by default:
-font.draw('Bdf Hi', linelimit=30)
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
 
-# This font only has latin and arabic support
-testfont = Font('tests/fonts/unifont-13.0.04-for-test.bdf')
-# You can optionally specify the missing glyphs' replacement
-# instead of a 0-width-and-height empty glyph by default
-testfont.draw('Bé H好Δi的',
-  missing={'glyphname': 'missing glyph', 'codepoint': 0, 'bbw': 16, 'bbh': 16, 'bbxoff': 0, 'bbyoff': -2, 'swx0': 1000, 'swy0': 0, 'dwx0': 16, 'dwy0': 0, 'swx1': None, 'swy1': None, 'dwx1': None, 'dwy1': None, 'vvectorx': None, 'vvectory': None, 'hexdata': ['0000', '0000', '0000', '3ff8', '3018', '2828', '2448', '2288', '2108', '2288', '2448', '2828', '3018', '3ff8', '0000', '0000']}
-)  # the missing replacement is "⌧" ("x" in a rectangle box)
+```js
+const font = await $Font(getline('test/fonts/unifont-13.0.04.bdf'))
+// draw 'Bdf Hi' to a bitmap:
+font.draw('Bdf Hi')
+// each glyph could be wider when mode: 0:
+font.draw('Bdf Hi', { mode: 0 })
+// right to left:
+font.draw('مرحبا', { direction: 'rl' })
+// each line has 30 pixels instead of 512 by default:
+font.draw('Bdf Hi', { linelimit: 30 })
+
+// This font only has latin and arabic support
+const testfont = await $Font(getline('test/fonts/unifont-13.0.04-for-test.bdf'))
+// You can optionally specify the missing glyphs' replacement
+// instead of a 0-width-and-height empty glyph by default
+testfont.draw('Bé H好Δi的', {
+  missing: { glyphname: 'missing glyph', codepoint: 0, bbw: 16, bbh: 16, bbxoff: 0, bbyoff: -2, swx0: 1000, swy0: 0, dwx0: 16, dwy0: 0, swx1: null, swy1: null, dwx1: null, dwy1: null, vvectorx: null, vvectory: null, hexdata: [ '0000', '0000', '0000', '3ff8', '3018', '2828', '2448', '2288', '2108', '2288', '2448', '2828', '3018', '3ff8', '0000', '0000' ] },
+}) // the missing replacement is "⌧" ("x" in a rectangle box)
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+const font = await $Font(getline('test/fonts/unifont-13.0.04.bdf'))
+// draw 'Bdf Hi' to a bitmap:
+font.draw('Bdf Hi')
+// each glyph could be wider when mode: 0:
+font.draw('Bdf Hi', { mode: 0 })
+// right to left:
+font.draw('مرحبا', { direction: 'rl' })
+// each line has 30 pixels instead of 512 by default:
+font.draw('Bdf Hi', { linelimit: 30 })
+
+// This font only has latin and arabic support
+const testfont = await $Font(getline('test/fonts/unifont-13.0.04-for-test.bdf'))
+// You can optionally specify the missing glyphs' replacement
+// instead of a 0-width-and-height empty glyph by default
+testfont.draw('Bé H好Δi的', {
+  missing: { glyphname: 'missing glyph', codepoint: 0, bbw: 16, bbh: 16, bbxoff: 0, bbyoff: -2, swx0: 1000, swy0: 0, dwx0: 16, dwy0: 0, swx1: null, swy1: null, dwx1: null, dwy1: null, vvectorx: null, vvectory: null, hexdata: [ '0000', '0000', '0000', '3ff8', '3018', '2828', '2448', '2288', '2108', '2288', '2448', '2828', '3018', '3ff8', '0000', '0000' ] },
+}) // the missing replacement is "⌧" ("x" in a rectangle box)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+<BDF func={(font) => font.draw('Bdf Hi')}/>
+
+---
+
+<BDF func={(font) => font.draw('Bdf Hi', { mode: 0 })}/>
+
+---
+
+<BDF func={(font) => font.draw('مرحبا', { direction: 'rl' })}/>
+
+---
+
+<BDF func={(font) => font.draw('Bdf Hi', { linelimit: 30 })}/>
+
+---
+
+<BDF fontfile='https://font.tomchen.org/bdfparser_fonts/unifont-13.0.04-for-test.bdf' func={(font) => font.draw('Bé H好Δi的', {
+  missing: { glyphname: 'missing glyph', codepoint: 0, bbw: 16, bbh: 16, bbxoff: 0, bbyoff: -2, swx0: 1000, swy0: 0, dwx0: 16, dwy0: 0, swx1: null, swy1: null, dwx1: null, dwy1: null, vvectorx: null, vvectory: null, hexdata: [ '0000', '0000', '0000', '3ff8', '3018', '2828', '2448', '2288', '2108', '2288', '2448', '2828', '3018', '3ff8', '0000', '0000' ] },
+})}/>
+
+---
 
 #### Parameters
 
@@ -451,7 +716,7 @@ testfont.draw('Bé H好Δi的',
 | (in `options`) `linelimit` | Optional | *number* | `512` | Maximum pixels per line (row) |
 | (in `options`) `mode` | Optional | *number* | `1` | `0`: uses [ffb](../bdf_spec/file_format/global_font_info#fontboundingbox), glyphs will be fixed-width (monospace) and -height<br />`1`: uses [dwidth](../bdf_spec/file_format/individual_glyph_info#dwidth) horizontally, [dwidth1](../bdf_spec/file_format/individual_glyph_info#dwidth1) vertically |
 | (in `options`) `direction` | Optional | *string* | `'lrtb'` | Writing direction. See below |
-| (in `options`) `usecurrentglyphspacing` | Optional | *boolean* | `False` | Useful when `direction='rl'`. For example, `font.draw('a的', direction='rl')` will misplace the wider "的" on the narrower "U" because normally we use the previous glyph's spacing ([dwidth](../bdf_spec/file_format/individual_glyph_info#dwidth)). You can use `font.draw('a的', direction='rl', usecurrentglyphspacing=True)` to use the current one and solve the problem |
+| (in `options`) `usecurrentglyphspacing` | Optional | *boolean* | `false` | Useful when `direction: 'rl'`. For example, `font.draw('a的', {direction: 'rl'})` will misplace the wider "的" on the narrower "U" because normally we use the previous glyph's spacing ([dwidth](../bdf_spec/file_format/individual_glyph_info#dwidth)). You can use `font.draw('a的', {direction: 'rl', usecurrentglyphspacing: true})` to use the current one and solve the problem |
 | (in `options`) `missing` | Optional | *object* or [*Glyph*](glyph) object | An empty glyph with glyphname `'empty'`, codepoint `8203`, hexdata `[]` and metrics all `0` | The missing glyphs will be replaced by this one. It can be a *object* of glyph meta information, or a [*Glyph*](glyph) object |
 
 `direction`:
@@ -489,10 +754,33 @@ See the `missing` parameter if you need to handle potentially missing glyphs.
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-# this is the same as `font.draw('Bdf Hi')`
+// this is the same as `font.draw('Bdf Hi')`
 font.drawcps([66, 100, 102, 32, 72, 105])
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+// this is the same as `font.draw('Bdf Hi')`
+font.drawcps([66, 100, 102, 32, 72, 105])
+```
+
+</TabItem>
+</Tabs>
+
+<BDF func={(font) => font.drawcps([66, 100, 102, 32, 72, 105])}/>
 
 #### Parameters
 
@@ -523,12 +811,39 @@ This method is almost identical to [`.draw()`](#draw), except in the first param
 
 #### Examples
 
+<Tabs
+  groupId="bdfparser-js-ts"
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript (CJS)', value: 'js', },
+    { label: 'TypeScript (strict)', value: 'ts', }
+  ]
+}>
+<TabItem value="js">
+
 ```js
-# draw all glyphs in the font, linelimit is 512 pixels by default:
+// draw all glyphs in the font, linelimit is 512 pixels by default:
 font.drawall()
-# change linelimit
-font.drawall(linelimit=700)
+// change linelimit
+font.drawall({linelimit: 700})
 ```
+
+</TabItem>
+<TabItem value="ts">
+
+```ts
+// draw all glyphs in the font, linelimit is 512 pixels by default:
+font.drawall()
+// change linelimit
+font.drawall({linelimit: 700})
+```
+
+</TabItem>
+</Tabs>
+
+:::note
+You can copy and paste `<BDF size={1} func={(font) => font.drawall()}/>` and `<BDF size={1} func={(font) => font.drawall({linelimit: 700})}/>` into the [Live Demo & Code Editor](editor) to see the result for unifont-reduced.bdf.
+:::
 
 #### Parameters
 
@@ -536,7 +851,7 @@ For parameters `order` and `r` in `options`, see [`.iterglyphs()`](#iterglyphs)'
 
 For the rest of the parameters (`linelimit`, `mode`, `direction` and `usecurrentglyphspacing` in `options`), see [`.draw()`](#draw)'s "Parameters" section
 
-Those parameters have the same names, meanings, optional-ness (they are all optional), types and default values as the ones in [`.iterglyphs()`](#iterglyphs) and [`.draw()`](#draw), **except one thing: `mode` is `0` by default** (`mode=0`: the glyphs will have the same width and height)
+Those parameters have the same names, meanings, optional-ness (they are all optional), types and default values as the ones in [`.iterglyphs()`](#iterglyphs) and [`.draw()`](#draw), **except one thing: `mode` is `0` by default** (`mode: 0`: the glyphs will have the same width and height)
 
 #### Return value
 

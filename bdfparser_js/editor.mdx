@@ -1,18 +1,18 @@
 ---
 id: editor
-title: Live Demo & Code Editor
+title: BDF Parser Live Code Editor
 sidebar_label: Live Demo & Code Editor
 ---
 
 ```jsx live
 <BDF func={
-  (font, {Font, Glyph, Bitmap}) => {
+  (font, {Font, Glyph, Bitmap, $Font, $Glyph, $Bitmap}) => {
     return font.draw('Hello! άßç й的のةُक!', {linelimit: 300}).glow(1)
   }
 }/>
 ```
 
-Feel free to edit the code. The result will be shown immediately.
+Welcome to the BDF Parser Live Demo & Code Editor. Feel free to edit the code. The result will be shown immediately.
 
 The `font` parameters of the inner function is a `Font` instance that's already loaded a BDF font file. The other parameter is an object containing { [`Font`](font), [`Glyph`](glyph), [`Bitmap`](bitmap) }, which refer to the three classes of the BDF Parser library.
 
@@ -40,7 +40,7 @@ If you want to customize the font file, the color of pixels, and the size multip
 
 ```jsx
 <BDF
-fontfile='http://localhost:3000/unifont-reduced.bdf'
+fontfile='https://font.tomchen.org/bdfparser_fonts/unifont-reduced.bdf'
 pixelcolors={{
   0: null,
   1: 'black',
@@ -48,7 +48,7 @@ pixelcolors={{
 }}
 size={2}
 func={
-  (font, {Font, Glyph, Bitmap}) => {
+  (font, {Font, Glyph, Bitmap, $Font, $Glyph, $Bitmap}}) => {
     return font.draw('Hello! άßç й的のةُक!', {linelimit: 300}).glow(1)
   }
 }/>

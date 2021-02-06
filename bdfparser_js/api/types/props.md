@@ -10,4 +10,4 @@ hide_title: true
 
 Ƭ **Props**: *Record*<*string*, *string* \| *null*\> & { `comment?`: *string*[]  }
 
-Defined in: bdfparser.ts:27
+Defined in: [bdfparser.ts:27](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L27)

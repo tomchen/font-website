@@ -10,4 +10,4 @@ hide_title: true
 
 Ƭ **DirectionNumberType**: *typeof* DIRE\_MAP[keyof *typeof* DIRE\_MAP]
 
-Defined in: bdfparser.ts:182
+Defined in: [bdfparser.ts:182](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L182)

@@ -18,8 +18,8 @@ module.exports = {
       },
       items: [
         {
-          to: 'all/',
-          activeBasePath: 'all',
+          // to: 'all/',
+          // activeBasePath: 'all',
           label: 'Standard Font',
           position: 'left',
           items: [
@@ -38,8 +38,8 @@ module.exports = {
           ],
         },
         {
-          to: 'bitmap_font/',
-          activeBasePath: 'bitmap_font',
+          // to: 'bitmap_font/',
+          // activeBasePath: 'bitmap_font',
           label: 'Bitmap / BDF Font',
           position: 'left',
           items: [

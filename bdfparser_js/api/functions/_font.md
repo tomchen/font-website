@@ -16,10 +16,10 @@ Shortcut for `new Font().load_filelines(filelines)` so you don't need to write `
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`filelines` | *AsyncIterableIterator*<*string*\> | Asynchronous iterator representing each line in string text from the font file    |
+`filelines` | *AsyncIterableIterator*<*string*\> | Asynchronous iterator containing each line in string text from the font file    |
 
 **Returns:** *Promise*<[*Font*](../classes/font.md)\>
 
 The newly instantiated `Font` object that's loaded the font file
 
-Defined in: bdfparser.ts:1834
+Defined in: [bdfparser.ts:1838](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1838)

@@ -10,7 +10,7 @@ hide_title: true
 
 `Glyph` object
 
-**`see`** [http://localhost:3000/bdfparser_js/glyph#glyph](http://localhost:3000/bdfparser_js/glyph#glyph)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/glyph](https://font.tomchen.org/bdfparser_js/glyph)
 
 ## Hierarchy
 
@@ -24,7 +24,7 @@ hide_title: true
 
 `Glyph` object constructor
 
-**`see`** [http://localhost:3000/bdfparser_js/glyph#glyph](http://localhost:3000/bdfparser_js/glyph#glyph)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/glyph](https://font.tomchen.org/bdfparser_js/glyph)
 
 #### Parameters:
 
@@ -35,7 +35,7 @@ Name | Type | Description |
 
 **Returns:** [*Glyph*](glyph.md)
 
-Defined in: bdfparser.ts:970
+Defined in: [bdfparser.ts:970](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L970)
 
 ## Properties
 
@@ -43,7 +43,7 @@ Defined in: bdfparser.ts:970
 
 • **font**: [*Font*](font.md)
 
-Defined in: bdfparser.ts:970
+Defined in: [bdfparser.ts:970](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L970)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 • **meta**: [*GlyphMeta*](../types/glyphmeta.md)
 
-Defined in: bdfparser.ts:969
+Defined in: [bdfparser.ts:969](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L969)
 
 ## Methods
 
@@ -61,7 +61,7 @@ Defined in: bdfparser.ts:969
 
 **Returns:** [*Bitmap*](bitmap.md)
 
-Defined in: bdfparser.ts:1095
+Defined in: [bdfparser.ts:1097](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1097)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 **Returns:** [*Bitmap*](bitmap.md)
 
-Defined in: bdfparser.ts:1112
+Defined in: [bdfparser.ts:1114](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1114)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 **Returns:** [*Bitmap*](bitmap.md)
 
-Defined in: bdfparser.ts:1083
+Defined in: [bdfparser.ts:1085](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1085)
 
 ___
 
@@ -97,7 +97,7 @@ Name | Type |
 
 **Returns:** [*Bitmap*](bitmap.md)
 
-Defined in: bdfparser.ts:1075
+Defined in: [bdfparser.ts:1077](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1077)
 
 ___
 
@@ -107,13 +107,13 @@ ___
 
 Get the character of the glyph.
 
-**`see`** [http://localhost:3000/bdfparser_js/glyph#chr](http://localhost:3000/bdfparser_js/glyph#chr)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/glyph#chr](https://font.tomchen.org/bdfparser_js/glyph#chr)
 
 **Returns:** *string*
 
 Character (one character string) of the glyph
 
-Defined in: bdfparser.ts:1031
+Defined in: [bdfparser.ts:1033](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1033)
 
 ___
 
@@ -123,13 +123,13 @@ ___
 
 Get the codepoint of the glyph.
 
-**`see`** [http://localhost:3000/bdfparser_js/glyph#cp](http://localhost:3000/bdfparser_js/glyph#cp)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/glyph#cp](https://font.tomchen.org/bdfparser_js/glyph#cp)
 
 **Returns:** *number*
 
 Codepoint of the glyph
 
-Defined in: bdfparser.ts:1020
+Defined in: [bdfparser.ts:1022](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1022)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 Draw the glyph to a `Bitmap` object.
 
-**`see`** [http://localhost:3000/bdfparser_js/glyph#draw](http://localhost:3000/bdfparser_js/glyph#draw)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/glyph#draw](https://font.tomchen.org/bdfparser_js/glyph#draw)
 
 #### Parameters:
 
@@ -152,32 +152,29 @@ Name | Type | Description |
 
 `Bitmap` object
 
-Defined in: bdfparser.ts:1045
+Defined in: [bdfparser.ts:1047](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1047)
 
 ___
 
 ### origin
 
-▸ **origin**(`mode?`: *null* \| *0* \| *1* \| *-1* \| *2*, `fromorigin?`: *null* \| *boolean*, `xoff?`: *null* \| *number*, `yoff?`: *null* \| *number*): [*number*, *number*]
+▸ **origin**(`options?`: { `fromorigin?`: *undefined* \| *null* \| *boolean* ; `mode?`: *undefined* \| *null* \| *0* \| *1* \| *-1* \| *2* ; `xoff?`: *undefined* \| *null* \| *number* ; `yoff?`: *undefined* \| *null* \| *number*  }): [*number*, *number*]
 
 Get the relative position (displacement) of the origin from the left bottom corner of the bitmap drawn by the method `.draw()`, or vice versa.
 
-**`see`** [http://localhost:3000/bdfparser_js/glyph#origin](http://localhost:3000/bdfparser_js/glyph#origin)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/glyph#origin](https://font.tomchen.org/bdfparser_js/glyph#origin)
 
 #### Parameters:
 
-Name | Type | Description |
+Name | Type | Default value |
 ------ | ------ | ------ |
-`mode?` | *null* \| *0* \| *1* \| *-1* \| *2* | Mode   |
-`fromorigin?` | *null* \| *boolean* | From or to the origin   |
-`xoff?` | *null* \| *number* | X offset   |
-`yoff?` | *null* \| *number* | Y offset    |
+`options` | { `fromorigin?`: *undefined* \| *null* \| *boolean* ; `mode?`: *undefined* \| *null* \| *0* \| *1* \| *-1* \| *2* ; `xoff?`: *undefined* \| *null* \| *number* ; `yoff?`: *undefined* \| *null* \| *number*  } | ... |
 
 **Returns:** [*number*, *number*]
 
 The relative position (displacement) represented by `[x, y]` array / tuple (where right and top directions are positive)
 
-Defined in: bdfparser.ts:1137
+Defined in: [bdfparser.ts:1139](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1139)
 
 ___
 
@@ -187,13 +184,13 @@ ___
 
 Gets a programmer-readable `string` representation of the `Glyph` object.
 
-**`see`** [http://localhost:3000/bdfparser_js/glyph#repr](http://localhost:3000/bdfparser_js/glyph#repr)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/glyph#repr](https://font.tomchen.org/bdfparser_js/glyph#repr)
 
 **Returns:** *string*
 
 String representation
 
-Defined in: bdfparser.ts:1003
+Defined in: [bdfparser.ts:1003](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L1003)
 
 ___
 
@@ -203,10 +200,10 @@ ___
 
 Gets a human-readable (multi-line) `string` representation of the `Glyph` object.
 
-**`see`** [http://localhost:3000/bdfparser_js/glyph#tostring](http://localhost:3000/bdfparser_js/glyph#tostring)
+**`see`** online docs: [https://font.tomchen.org/bdfparser_js/glyph#tostring](https://font.tomchen.org/bdfparser_js/glyph#tostring)
 
 **Returns:** *string*
 
 String representation
 
-Defined in: bdfparser.ts:992
+Defined in: [bdfparser.ts:992](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L992)

@@ -10,4 +10,4 @@ hide_title: true
 
 Ƭ **DirectionType**: keyof *typeof* DIRE\_SHORTCUT\_MAP
 
-Defined in: bdfparser.ts:180
+Defined in: [bdfparser.ts:180](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L180)

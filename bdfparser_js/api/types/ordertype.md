@@ -10,4 +10,4 @@ hide_title: true
 
 Ƭ **OrderType**: *-1* \| *0* \| *1* \| *2*
 
-Defined in: bdfparser.ts:107
+Defined in: [bdfparser.ts:107](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L107)
