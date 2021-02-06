@@ -10,4 +10,4 @@ hide_title: true
 
 Ƭ **GlyphDrawModeType**: *-1* \| *0* \| *1* \| *2*
 
-Defined in: [bdfparser.ts:108](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L108)
+Defined in: [bdfparser.ts:108](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L108)

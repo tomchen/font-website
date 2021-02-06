@@ -10,4 +10,4 @@ hide_title: true
 
 Ƭ **CodepointRangeType**: *number* \| [*number*, *number*] \| [*number*, *number*][]
 
-Defined in: [bdfparser.ts:106](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L106)
+Defined in: [bdfparser.ts:106](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L106)

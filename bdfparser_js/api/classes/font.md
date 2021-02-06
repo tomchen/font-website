@@ -30,7 +30,7 @@ hide_title: true
 
 • `Private` **\_\_curline\_chars**: *null* \| *string*= null
 
-Defined in: [bdfparser.ts:196](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L196)
+Defined in: [bdfparser.ts:196](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L196)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • `Private` **\_\_curline\_startchar**: *null* \| *string*= null
 
-Defined in: [bdfparser.ts:195](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L195)
+Defined in: [bdfparser.ts:195](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L195)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • `Private` `Optional` **\_\_f**: *undefined* \| *AsyncIterableIterator*<*string*\>
 
-Defined in: [bdfparser.ts:197](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L197)
+Defined in: [bdfparser.ts:197](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L197)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 • `Private` **\_\_glyph\_count\_to\_check**: *null* \| *number*= null
 
-Defined in: [bdfparser.ts:194](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L194)
+Defined in: [bdfparser.ts:194](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L194)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 • `Private` **\_\_headers**: *Partial*<[*Headers*](../types/headers.md)\>
 
-Defined in: [bdfparser.ts:191](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L191)
+Defined in: [bdfparser.ts:191](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L191)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 • **glyphs**: *Map*<*number*, [*GlyphMetaInFont*](../types/glyphmetainfont.md)\>
 
-Defined in: [bdfparser.ts:193](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L193)
+Defined in: [bdfparser.ts:193](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L193)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 • **headers**: *undefined* \| [*Headers*](../types/headers.md)
 
-Defined in: [bdfparser.ts:190](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L190)
+Defined in: [bdfparser.ts:190](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L190)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 • **props**: [*Props*](../types/props.md)
 
-Defined in: [bdfparser.ts:192](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L192)
+Defined in: [bdfparser.ts:192](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L192)
 
 ## Accessors
 
@@ -103,7 +103,7 @@ Returns how many glyphs actually exist in the font.
 
 Actual glyph count in the font
 
-Defined in: [bdfparser.ts:529](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L529)
+Defined in: [bdfparser.ts:529](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L529)
 
 ## Methods
 
@@ -113,7 +113,7 @@ Defined in: [bdfparser.ts:529](https://github.com/tomchen/bdfparser-js/blob/dfd4
 
 **Returns:** *Promise*<*void*\>
 
-Defined in: [bdfparser.ts:378](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L378)
+Defined in: [bdfparser.ts:378](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L378)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 **Returns:** *Promise*<*void*\>
 
-Defined in: [bdfparser.ts:228](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L228)
+Defined in: [bdfparser.ts:228](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L228)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [bdfparser.ts:332](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L332)
+Defined in: [bdfparser.ts:332](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L332)
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 **Returns:** *Promise*<*void*\>
 
-Defined in: [bdfparser.ts:339](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L339)
+Defined in: [bdfparser.ts:339](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L339)
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 **Returns:** *Promise*<*void*\>
 
-Defined in: [bdfparser.ts:400](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L400)
+Defined in: [bdfparser.ts:400](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L400)
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [bdfparser.ts:508](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L508)
+Defined in: [bdfparser.ts:508](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L508)
 
 ___
 
@@ -186,7 +186,7 @@ Name | Type | Default value | Description |
 
 `Bitmap` object
 
-Defined in: [bdfparser.ts:885](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L885)
+Defined in: [bdfparser.ts:885](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L885)
 
 ___
 
@@ -208,7 +208,7 @@ Name | Type | Default value |
 
 `Bitmap` object
 
-Defined in: [bdfparser.ts:935](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L935)
+Defined in: [bdfparser.ts:935](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L935)
 
 ___
 
@@ -231,7 +231,7 @@ Name | Type | Default value | Description |
 
 `Bitmap` object
 
-Defined in: [bdfparser.ts:690](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L690)
+Defined in: [bdfparser.ts:690](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L690)
 
 ___
 
@@ -253,7 +253,7 @@ Name | Type | Description |
 
 `Glyph` object, or `null` if the glyph does not exist in the font
 
-Defined in: [bdfparser.ts:649](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L649)
+Defined in: [bdfparser.ts:649](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L649)
 
 ___
 
@@ -275,7 +275,7 @@ Name | Type | Description |
 
 `Glyph` object, or `null` if the glyph does not exist in the font
 
-Defined in: [bdfparser.ts:621](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L621)
+Defined in: [bdfparser.ts:621](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L621)
 
 ___
 
@@ -298,7 +298,7 @@ Name | Type | Description |
 
 An iterator of the codepoints of glyphs
 
-Defined in: [bdfparser.ts:543](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L543)
+Defined in: [bdfparser.ts:543](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L543)
 
 ___
 
@@ -321,7 +321,7 @@ Name | Type | Description |
 
 An iterator of glyphs as `Glyph` objects. Missing glyphs are replaced by `null`
 
-Defined in: [bdfparser.ts:603](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L603)
+Defined in: [bdfparser.ts:603](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L603)
 
 ___
 
@@ -343,7 +343,7 @@ Name | Type | Description |
 
 List of missing glyph(s)' characters, or `null` if all the glyphs in your string exist in the font
 
-Defined in: [bdfparser.ts:663](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L663)
+Defined in: [bdfparser.ts:663](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L663)
 
 ___
 
@@ -365,4 +365,4 @@ Name | Type | Description |
 
 The current `Font` object
 
-Defined in: [bdfparser.ts:208](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L208)
+Defined in: [bdfparser.ts:208](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L208)

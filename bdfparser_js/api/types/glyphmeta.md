@@ -32,4 +32,4 @@ Name | Type |
 `vvectorx` | [*GlyphMetaInFont*](glyphmetainfont.md)[*14*] |
 `vvectory` | [*GlyphMetaInFont*](glyphmetainfont.md)[*15*] |
 
-Defined in: [bdfparser.ts:69](https://github.com/tomchen/bdfparser-js/blob/dfd4e71/src/bdfparser.ts#L69)
+Defined in: [bdfparser.ts:69](https://github.com/tomchen/bdfparser-js/blob/898ed20/src/bdfparser.ts#L69)
