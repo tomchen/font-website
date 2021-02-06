@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[13],{83:function(e){e.exports=JSON.parse('{"pluginId":"bdf_collection","version":"current","label":"Next","isLast":true,"docsSidebars":{"sidebar":[{"type":"link","label":"Coming soon...","href":"/bdf_collection/"}]},"permalinkToSidebar":{"/bdf_collection/":"sidebar"}}')}}]);

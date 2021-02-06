@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[36],{106:function(e){e.exports=JSON.parse('{"pluginId":"bitmap_font","version":"current","label":"Next","isLast":true,"docsSidebars":{"sidebar":[{"type":"link","label":"Coming soon...","href":"/bitmap_font/"}]},"permalinkToSidebar":{"/bitmap_font/":"sidebar"}}')}}]);
