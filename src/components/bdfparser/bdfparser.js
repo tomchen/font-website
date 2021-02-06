@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -15,8 +14,6 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
     function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
     function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.$Bitmap = exports.$Glyph = exports.$Font = exports.Bitmap = exports.Glyph = exports.Font = void 0;
 const setProperty = (obj, key, value) => {
     obj[key] = value;
 };
@@ -79,7 +76,7 @@ const DIRE_MAP = { lr: 1, rl: 2, tb: 0, bt: -1 };
  *
  * @see online docs: {@link https://font.tomchen.org/bdfparser_js/font}
  */
-class Font {
+export class Font {
     constructor() {
         this.headers = undefined;
         this.__headers = {};
@@ -783,13 +780,12 @@ class Font {
         });
     }
 }
-exports.Font = Font;
 /**
  * `Glyph` object
  *
  * @see online docs: {@link https://font.tomchen.org/bdfparser_js/glyph}
  */
-class Glyph {
+export class Glyph {
     /**
      * `Glyph` object constructor
      *
@@ -968,13 +964,12 @@ class Glyph {
         return _fromorigin ? ret : [0 - ret[0], 0 - ret[1]];
     }
 }
-exports.Glyph = Glyph;
 /**
  * `Bitmap` object
  *
  * @see online docs: {@link https://font.tomchen.org/bdfparser_js/bitmap}
  */
-class Bitmap {
+export class Bitmap {
     /**
      * Initialize a `Bitmap` object. Load binary bitmap data (`array` of `string`s).
      *
@@ -1529,7 +1524,6 @@ class Bitmap {
         return this;
     }
 }
-exports.Bitmap = Bitmap;
 /**
  * Shortcut for `new Font().load_filelines(filelines)` so you don't need to write `new` and `.load_filelines`
  *
@@ -1537,10 +1531,9 @@ exports.Bitmap = Bitmap;
  *
  * @returns The newly instantiated `Font` object that's loaded the font file
  */
-const $Font = (filelines) => __awaiter(void 0, void 0, void 0, function* () {
+export const $Font = (filelines) => __awaiter(void 0, void 0, void 0, function* () {
     return yield new Font().load_filelines(filelines);
 });
-exports.$Font = $Font;
 /**
  * Shortcut for `new Glyph(meta_obj, font)` so you don't need to write `new`
  *
@@ -1549,10 +1542,9 @@ exports.$Font = $Font;
  *
  * @returns The newly instantiated `Glyph` object
  */
-const $Glyph = (meta_obj, font) => {
+export const $Glyph = (meta_obj, font) => {
     return new Glyph(meta_obj, font);
 };
-exports.$Glyph = $Glyph;
 /**
  * Shortcut for `new Bitmap(bin_bitmap_list)` so you don't need to write `new`
  *
@@ -1560,7 +1552,6 @@ exports.$Glyph = $Glyph;
  *
  * @returns The newly instantiated `Bitmap` object
  */
-const $Bitmap = (bin_bitmap_list) => {
+export const $Bitmap = (bin_bitmap_list) => {
     return new Bitmap(bin_bitmap_list);
 };
-exports.$Bitmap = $Bitmap;

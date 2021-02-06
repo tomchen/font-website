@@ -1,10 +1,2 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.$Bitmap = exports.$Glyph = exports.$Font = exports.Bitmap = exports.Glyph = exports.Font = void 0;
-const bdfparser_1 = require("./bdfparser");
-Object.defineProperty(exports, "Font", { enumerable: true, get: function () { return bdfparser_1.Font; } });
-Object.defineProperty(exports, "Glyph", { enumerable: true, get: function () { return bdfparser_1.Glyph; } });
-Object.defineProperty(exports, "Bitmap", { enumerable: true, get: function () { return bdfparser_1.Bitmap; } });
-Object.defineProperty(exports, "$Font", { enumerable: true, get: function () { return bdfparser_1.$Font; } });
-Object.defineProperty(exports, "$Glyph", { enumerable: true, get: function () { return bdfparser_1.$Glyph; } });
-Object.defineProperty(exports, "$Bitmap", { enumerable: true, get: function () { return bdfparser_1.$Bitmap; } });
+import { Font, Glyph, Bitmap, $Font, $Glyph, $Bitmap, } from './bdfparser';
+export { Font, Glyph, Bitmap, $Font, $Glyph, $Bitmap };
