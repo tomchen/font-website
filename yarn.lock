@@ -2443,6 +2443,11 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+bdfparser@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/bdfparser/-/bdfparser-2.2.0.tgz#da6e849025396722419dee02f0073a01b12102d5"
+  integrity sha512-e0X/9M279jUTR5VDwITworLlKMcnAMZ6VjH0kvmIiOcR7XvX7jE0nJ/NhqmUH9omCQEW+HgLbXoFSaVZLl955Q==
+
 bfj@^6.1.1:
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/bfj/-/bfj-6.1.2.tgz#325c861a822bcb358a41c78a33b8e6e2086dde7f"

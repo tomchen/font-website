@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { Font, Glyph, Bitmap, $Font, $Glyph, $Bitmap } from './bdfparser/index'
+import { Font, Glyph, Bitmap, $Font, $Glyph, $Bitmap } from 'bdfparser'
 import fetchline from 'fetchline'
 
 const fonts = {}
